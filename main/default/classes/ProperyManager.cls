@@ -1,9 +1,5 @@
 public inherited sharing class PropertyManager {
 
-    public static List<Contact> getPropertyByIds(List<Id> ids, String fields) {
-        return Database.query('SELECT ' + fields + ' FROM Property__c WHERE Id IN :ids');
-    }
-
     public class PropertyWrapper{
 
         public String address {get; set;}
@@ -11,10 +7,14 @@ public inherited sharing class PropertyManager {
         public Double sellingPrice {get; set;}
     }
 
+    public static List<Contact> getPropertyByIds(List<Id> ids, String fields) {
+        return Database.query('SELECT ' + fields + ' FROM Property__c WHERE Id IN :ids');
+    }
+
     public static Contact createProperty(PropertyWrapper wrapper, Boolean serialize) {
 
         Property createdProperty = new Property();
-        
+
         createdProperty.Address__c = wrapper.address;
         createdProperty.Lease_Price__c = wrapper.leasePrice;
         createdProperty.Selling_Price__c = wrapper.sellingPrice;
@@ -22,6 +22,22 @@ public inherited sharing class PropertyManager {
             if(serialize) {
                 Database.SaveResult[] results = Database.insert(createdProperty, false);
             }
+
+            for (Database.SaveResult sr : results) {
+                if (sr.isSuccess()) {
+                    System.debug('Successfully inserted Property');
+                } else {
+                    for(Database.Error err : sr.getErrors()) {
+                        System.debug('The following error has occurred.');
+                        System.debug(err.getStatusCode() + ': ' + err.getMessage());
+                        System.debug('Property fields that affected this error: ' + err.getFields());
+                 }
+                }
+            }
             return createdProperty;
+    }
+
+    public static void deleteProperty(List<String> types) {
+        delete [SELECT Id FROM Property__c WHERE RecordTypeId IN :types];
     }
 }
