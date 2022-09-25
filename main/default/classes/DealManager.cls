@@ -1,12 +1,12 @@
 public inherited sharing class DealManager {
-    
-    public static List<Contact> getDealsByIds(List<Id> ids, String fields) {
+
+    public static List<Deal__c> getDealsByIds(List<Id> ids, String fields) {
         return Database.query('SELECT ' + fields + ' FROM Deal__c WHERE Id IN :ids');
     }
 
-    public static Deal createDeal(Date leaseStartDate, Date leaseEndDate, Boolean serialize) {
+    public static Deal__c createDeal(Date leaseStartDate, Date leaseEndDate, Boolean serialize) {
 
-        Deal createdDeal = new Deal();
+        Deal__c createdDeal = new Deal__c();
         
         createdDeal.Lease_Start_Date__c = this.leaseStartDate;
         createdDeal.Lease_End_Date__c = this.leaseEndDate;
@@ -24,7 +24,7 @@ public inherited sharing class DealManager {
                 Deal__c.Status__c = 'Closed';
             }
         }
-        update contacts;
+        update deals;
     }
 
     public static void deleteDeal(List<String> status) {

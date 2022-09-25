@@ -7,13 +7,13 @@ public inherited sharing class PropertyManager {
         public Double sellingPrice {get; set;}
     }
 
-    public static List<Contact> getPropertyByIds(List<Id> ids, String fields) {
+    public static List<Property__c> getPropertyByIds(List<Id> ids, String fields) {
         return Database.query('SELECT ' + fields + ' FROM Property__c WHERE Id IN :ids');
     }
 
-    public static Contact createProperty(PropertyWrapper wrapper, Boolean serialize) {
+    public static Property__c createProperty(PropertyWrapper wrapper, Boolean serialize) {
 
-        Property createdProperty = new Property();
+        Property__c createdProperty = new Property__c();
 
         createdProperty.Address__c = wrapper.address;
         createdProperty.Lease_Price__c = wrapper.leasePrice;
