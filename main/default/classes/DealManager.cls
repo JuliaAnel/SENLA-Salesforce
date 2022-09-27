@@ -4,12 +4,13 @@ public inherited sharing class DealManager {
         return Database.query('SELECT ' + fields + ' FROM Deal__c WHERE Id IN :ids');
     }
 
-    public static Deal__c createDeal(Date leaseStartDate, Date leaseEndDate, Boolean serialize) {
+    public static Deal__c createDeal(Id sellingProperty, Date leaseStartDate, Date leaseEndDate, Boolean serialize) {
 
         Deal__c createdDeal = new Deal__c();
         
         createdDeal.Lease_Start_Date__c = this.leaseStartDate;
         createdDeal.Lease_End_Date__c = this.leaseEndDate;
+        createdDeal.Selling_Property__c = this.sellingProperty;
 
             if(serialize) {
                 insert createdDeal;

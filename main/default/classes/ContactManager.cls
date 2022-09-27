@@ -3,7 +3,9 @@ public inherited sharing class ContactManager {
     public class ContactWrapper{
         public String firstName {get; set;}
         public String lastName {get; set;}
+        public String phone {get; set;}
         public String email {get; set;}
+        public Id recordTypeId {get; set;}
     }
 
     public static List<Contact> getContactByIds (List<Id> ids, String FirstName, String LastName) {
@@ -15,7 +17,9 @@ public inherited sharing class ContactManager {
         Contact createdContact = new Contact();
         createdContact.FirstName = wrapper.firstName;
         createdContact.LastName = wrapper.lastName;
+        createdContact.Phone = wrapper.phone;
         createdContact.Email = wrapper.email;
+        createdContact.RecordTypeId = wrapper.recordTypeId;
 
             if(serialize) {
                 insert createdContact;
