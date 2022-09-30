@@ -62,8 +62,8 @@ public class TestDataFactory {
         return properties;
     }
 
-    public static Deal__c createDeal(Contact seller, Contact customer) {
-        Deal__c deal = new Deal__c(Seller__c = seller.Id, Customer__c = customer.Id, RecordTypeId = DEFAULT_DEAL_TYPE);
+    public static Deal__c createDeal(Contact seller, Contact buyer) {
+        Deal__c deal = new Deal__c(Seller__c = seller.Id, Buyer__c = buyer.Id, RecordTypeId = DEFAULT_DEAL_TYPE);
         insert deal;
         return deal;
     }

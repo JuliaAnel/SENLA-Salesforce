@@ -1,4 +1,4 @@
-public inherited sharing class CommissionPercentManager {
+public inherited sharing class ComissionPercentManager {
 
     public class CommissionPercentWrapper {
         public Id brokerId {get; set;}

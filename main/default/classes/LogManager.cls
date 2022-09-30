@@ -8,8 +8,8 @@ public inherited sharing class LogManager {
 
         Log__c createdLog = new Log__c();
 
-        createdLog.Type = this.type;
-        createdLog.Message = this.message;
+        createdLog.Type__c = type;
+        createdLog.Message__c = message;
 
         insert createdLog;
         
@@ -29,6 +29,6 @@ public inherited sharing class LogManager {
     }
 
     public static void deleteLog(List<String> types) {
-        delete [SELECT Id FROM Log__c WHERE Log__c.Type IN :types];
+        delete [SELECT Id FROM Log__c WHERE Log__c.Type__c IN :types];
     }
 }

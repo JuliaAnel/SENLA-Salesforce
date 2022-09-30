@@ -25,13 +25,14 @@ public inherited sharing class ContactManager {
                 insert createdContact;
             }
             return createdContact;
+
     }
 
-    public static void updateContact() {
-        List<Contact> contacts = [SELECT Id, FirstName, LastName FROM Contact WHERE CreatedDate = LAST_MONTH];
+    public static void updateContact(List<Id> ids, String phone) {
+        List<Contact> contacts = [SELECT FirstName, LastName, MobilePhone FROM Contact WHERE Id in :ids];
         if (!contacts.isEmpty() && contacts != null) {
             for (Contact c : contacts) {
-                Contact.Description = 'Your contact is created this month!';
+                c.Description = 'Your contact is created this month!';
             }
         } 
         update contacts; 

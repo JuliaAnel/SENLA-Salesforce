@@ -8,9 +8,9 @@ public inherited sharing class DealManager {
 
         Deal__c createdDeal = new Deal__c();
         
-        createdDeal.Lease_Start_Date__c = this.leaseStartDate;
-        createdDeal.Lease_End_Date__c = this.leaseEndDate;
-        createdDeal.Selling_Property__c = this.sellingProperty;
+        createdDeal.Lease_Start_Date__c = leaseStartDate;
+        createdDeal.Lease_End_Date__c = leaseEndDate;
+        createdDeal.Selling_Property__c = sellingProperty;
 
             if(serialize) {
                 insert createdDeal;
@@ -22,7 +22,7 @@ public inherited sharing class DealManager {
         List<Deal__c> deals = [SELECT Id FROM Deal__c WHERE Lease_End_Date__c = Today];
         if (!deals.isEmpty() && deals != null) {
             for (Deal__c d : deals) {
-                Deal__c.Status__c = 'Closed';
+                d.Status__c = 'Closed Won';
             }
         }
         update deals;
