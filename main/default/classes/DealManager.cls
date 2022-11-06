@@ -2,19 +2,23 @@ public inherited sharing class DealManager {
 
 
 public static final Id SALE_RECORD_TYPE_ID = Schema.SObjectType.Deal__c.getRecordTypeInfosByName()
-.get('Sale').getRecordTypeId();
+.get('Sale Deal').getRecordTypeId();
 
 public static List<Deal__c> getNotClosedSaleDealsByProperties(List<Id> propertyIds) {
    return [
            SELECT Id
            FROM Deal__c
-           WHERE Property__c IN :propertyIds
+           WHERE Selling_Property__c IN :propertyIds
            AND Status__c NOT IN ('Closed Won', 'Closed', 'Closed Lost')
-           AND RecodrTypeId = :SALE_RECORD_TYPE_ID
+           AND RecordTypeId = :SALE_RECORD_TYPE_ID
    ];
 }
     public static List<Deal__c> getDealsByIds(List<Id> ids, String fields) {
         return Database.query('SELECT ' + fields + ' FROM Deal__c WHERE Id IN :ids');
+    }
+
+    public static List<Deal__c> getDealsBySeller(List<Id> sellers, String fields) {
+        return Database.query('SELECT ' + fields + ' FROM Deal__c WHERE Seller__c IN :sellers' + ' GROUP BY Selling_Property__c.RecordTypeId');
     }
 
     public static Deal__c createDeal(Id sellingProperty, Date leaseStartDate, Date leaseEndDate, Boolean serialize) {

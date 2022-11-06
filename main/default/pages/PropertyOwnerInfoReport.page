@@ -1,0 +1,58 @@
+<apex:page lightningStylesheets="true" standardController="Contact" extensions="PropertyOwnerInfoReportController">
+    <head>
+        <style>
+            body {
+            	font-family: "Times New Roman";
+                color: black;
+            }
+            #title {
+                text-align: center;
+            }
+            .info {
+                margin-left: 50px;
+            }
+            table {
+                height= 200;
+                text-align = center;
+                th {
+    			background-color: CornflowerBlue;
+                text-align: center;
+                font-weight: bold;
+			    }
+            }
+            .stamp {
+                width= 100;
+                height= 100;
+                margin-top: 500px;
+                float:right;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 id="title">Property Owner Info Report</h1>
+        <div class="info">
+            <h2>Property Owner Name: {!Contact.Name}></h2>
+            <h2>Total Property Price: {!Contact.Total_Property_Price__c}></h2>
+        </div>
+        <table border = "1">
+            <tr>
+                <th><p><b>Property Type</b></p></th>
+                <th><p><b>Column 1</b></p></th>
+                <th><p><b>Column 2</b></p></th>
+                <th><p><b>Column 3</b></p></th>
+            </tr>
+    
+        <apex:repeat value="{!Deals}" var="deal" >
+            <tr> 
+                <td> <p>{!deal.propertyRecordType}</p> </td>  
+                <td> <p>{!deal.numberOfWonDeals}</p> </td>  
+                <td> <p>{!deal.totalDealAmount}</p> </td>  
+                <td> <p>{!deal.dealAmountAfterCommission}</p> </td>  
+            </tr>                  
+        </apex:repeat> 
+        </table>
+        <div class="stamp">
+            <apex:image url="{! $Resource.Stamp}"/>
+        </div>
+    </body>
+</apex:page>

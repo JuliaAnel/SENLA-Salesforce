@@ -3,7 +3,7 @@ public class TestDataFactory {
 
     public static final String EN = 'en_US';
     public static final Id DEFAULT_CONTACT_TYPE = Schema.SObjectType.Contact.getRecordTypeInfosByName()
-                                                  .get('Broker').getRecordTypeId();
+                                                  .get('Property Owner').getRecordTypeId();
     public static final Id DEFAULT_PROPERTY_TYPE = Schema.SObjectType.Property__c.getRecordTypeInfosByName()
                                                   .get('Industrial').getRecordTypeId();                                              
     public static final Id DEFAULT_DEAL_TYPE = Schema.SObjectType.Deal__c.getRecordTypeInfosByName()
@@ -37,6 +37,13 @@ public class TestDataFactory {
         return contact;
     }
 
+    public static Contact createContact(String firstName, String lastName, String email) {
+        Contact contact = new Contact(FirstName = firstName, LastName = lastName, Email = email, RecordTypeId = DEFAULT_CONTACT_TYPE);
+
+        insert contact;
+        return contact;
+    }
+
     public static List<Contact> createContacts(Integer count) {
         List<Contact> contacts = new List<Contact>(count);
         for (Integer i = 0; i < count; i++) {
@@ -53,6 +60,13 @@ public class TestDataFactory {
         return properties;
     }
 
+    public static Property__c createProperty(Contact owner, Decimal sellingPrice, Decimal leasePrice, String Recordtype) {
+        Property__c properties = new Property__c(Property_Owner__c = owner.Id, Selling_Price__c = sellingPrice,
+                                        Lease_Price__c = leasePrice, Address__c = address, RecordTypeId = Recordtype);
+        insert properties;
+        return properties;
+    }
+
     public static List<Property__c> createProperties(Integer count, Contact owner) {
         List<Property__c> properties = new List<Property__c>(count);
         for (Integer i = 0; i < count; i++) {
@@ -64,6 +78,12 @@ public class TestDataFactory {
 
     public static Deal__c createDeal(Contact seller, Contact buyer) {
         Deal__c deal = new Deal__c(Seller__c = seller.Id, Buyer__c = buyer.Id, RecordTypeId = DEFAULT_DEAL_TYPE);
+        insert deal;
+        return deal;
+    }
+
+    public static Deal__c createDeal(Contact seller, Contact buyer,  Property__c sellingProperty, String status, String recordType) {
+        Deal__c deal = new Deal__c(Seller__c = seller.Id, Buyer__c = buyer.Id,  Selling_Property__c = sellingProperty.Id, Status__c = status, RecordTypeId = recordType);
         insert deal;
         return deal;
     }
