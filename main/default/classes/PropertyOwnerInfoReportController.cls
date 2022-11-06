@@ -1,6 +1,6 @@
 public with sharing class PropertyOwnerInfoReportController {
 
-     private final Contact c;
+     public Contact c;
 
      String fields = 'Name, Sum_of_the_deal__c, Sum_after_commission__c, Status__c, Selling_Property__c.RecordType.Name, Selling_Property__c.RecordTypeId';
     

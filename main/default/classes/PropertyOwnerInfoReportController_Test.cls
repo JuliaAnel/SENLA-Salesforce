@@ -12,6 +12,8 @@ private class PropertyOwnerInfoReportController_Test {
     private static final Id SPACE_PROPERTY = Schema.SObjectType.Property__c.getRecordTypeInfosByName()
         .get('Space').getRecordTypeId();
 
+    @TestSetup
+    static void setup(){
     Contact firstPropertyOwner = TestDataFactory.createContact('Sam', 'Hill', '467358695');
     Contact secondPropertyOwner = TestDataFactory.createContact('Din', 'Deichman', '7896546789');  
     
@@ -28,6 +30,7 @@ private class PropertyOwnerInfoReportController_Test {
     Deal__c deal4 = TestDataFactory.createDeal(firstPropertyOwner, secondPropertyOwner, property4, 'Closed Won', SALE_TYPE);
     Deal__c deal5 = TestDataFactory.createDeal(firstPropertyOwner, secondPropertyOwner, property5, 'Closed Won', SALE_TYPE);
     Deal__c deal6 = TestDataFactory.createDeal(firstPropertyOwner, secondPropertyOwner, property6, 'Closed Won', SALE_TYPE);
+    }
 
     @isTest static void testgetDeals() {
         Contact propertyOwner = [SELECT Id, Name FROM Contact WHERE FirstName = 'Hill' LIMIT 1];
