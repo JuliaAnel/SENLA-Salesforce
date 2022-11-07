@@ -18,7 +18,7 @@ public static List<Deal__c> getNotClosedSaleDealsByProperties(List<Id> propertyI
     }
 
     public static List<Deal__c> getDealsBySeller(List<Id> sellers, String fields) {
-        return Database.query('SELECT ' + fields + ' FROM Deal__c WHERE Seller__c IN :sellers' + ' GROUP BY Selling_Property__c.RecordTypeId');
+        return Database.query('SELECT ' + fields + ' FROM Deal__c WHERE Seller__c IN :sellers');
     }
 
     public static Deal__c createDeal(Id sellingProperty, Date leaseStartDate, Date leaseEndDate, Boolean serialize) {

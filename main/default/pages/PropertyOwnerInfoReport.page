@@ -1,6 +1,6 @@
 <apex:page lightningStylesheets="true" standardController="Contact" extensions="PropertyOwnerInfoReportController">
     <head>
-        <style>
+        <style type="text/css">
             body {
             	font-family: "Times New Roman";
                 color: black;
@@ -9,50 +9,61 @@
                 text-align: center;
             }
             .info {
-                margin-left: 50px;
+            	font-size: 16px;
+            	margin: 8px 0;
+            }
+            p {
+            font-size: 16px;
             }
             table {
-                height= 200;
-                text-align = center;
-                th {
-    			background-color: CornflowerBlue;
-                text-align: center;
-                font-weight: bold;
-			    }
+              	height: 100px;
+            	width: 100%; 	
             }
+            th {
+                background-color: #80b3ff;
+            	text-align: center;
+                font-weight: bold;
+            	font-size: 20px;
+			}
+            td {
+  				text-align: center;
+			}
             .stamp {
-                width= 100;
-                height= 100;
                 margin-top: 500px;
                 float:right;
-            }
+            	width: 135px;
+            }       
         </style>
     </head>
     <body>
         <h1 id="title">Property Owner Info Report</h1>
         <div class="info">
-            <h2>Property Owner Name: {!Contact.Name}></h2>
-            <h2>Total Property Price: {!Contact.Total_Property_Price__c}></h2>
+            <p><b>Property Owner Name:</b> {!Contact.Name}</p>
+            <p><b>Total Property Price($):</b> {!Contact.Total_Property_Price__c}</p>
         </div>
         <table border = "1">
-            <tr>
-                <th><p><b>Property Type</b></p></th>
-                <th><p><b>Column 1</b></p></th>
-                <th><p><b>Column 2</b></p></th>
-                <th><p><b>Column 3</b></p></th>
-            </tr>
-    
+            <thead>
+                <tr>
+                	<th><b>Property Type</b></th>
+                	<th><b>Column 1</b></th>
+                	<th><b>Column 2</b></th>
+                	<th><b>Column 3</b></th>
+                   </tr>
+            </thead>
+    		
         <apex:repeat value="{!Deals}" var="deal" >
-            <tr> 
-                <td> <p>{!deal.propertyRecordType}</p> </td>  
-                <td> <p>{!deal.numberOfWonDeals}</p> </td>  
-                <td> <p>{!deal.totalDealAmount}</p> </td>  
-                <td> <p>{!deal.dealAmountAfterCommission}</p> </td>  
-            </tr>                  
+            <tbody>
+            	<tr> 
+                	<td><p>{!deal.propertyRecordType}</p></td>  
+                	<td><p>{!deal.numberOfWonDeals}</p></td>  
+                	<td><p>{!deal.totalDealAmount}</p></td>  
+                	<td><p>{!deal.dealAmountAfterCommission}</p></td>  
+            	</tr> 
+            </tbody>
         </apex:repeat> 
         </table>
         <div class="stamp">
-            <apex:image url="{! $Resource.Stamp}"/>
+            <apex:image url="{! $Resource.Stamp}" height="100"/>
         </div>
     </body>
 </apex:page>
