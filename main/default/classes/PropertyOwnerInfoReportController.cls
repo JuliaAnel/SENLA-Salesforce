@@ -2,7 +2,7 @@ public with sharing class PropertyOwnerInfoReportController {
 
      public Contact c;
 
-     String fields = 'Name, Sum_of_the_deal__c, Sum_after_commission__c, Status__c, Selling_Property__c.RecordType.Name, Selling_Property__c.RecordTypeId';
+     String fields = 'Name, Sum_of_the_deal__c, Sum_after_commission__c, Status__c, Selling_Property__r.RecordTypeId';
     
     public PropertyOwnerInfoReportController(ApexPages.StandardController stdController) {
         this.c = (Contact)stdController.getRecord();
@@ -15,7 +15,7 @@ public with sharing class PropertyOwnerInfoReportController {
         public Decimal dealAmountAfterCommission {get;set;}
 
         public DealWrapper(List<Deal__c> deals) {
-            this.propertyRecordType = deals[0].Selling_Property__c.RecordTypeId;
+            this.propertyRecordType = deals[0].Selling_Property__r.RecordTypeId;
             this.numberOfWonDeals = 0;
             this.totalDealAmount = 0;
             this.dealAmountAfterCommission = 0;
