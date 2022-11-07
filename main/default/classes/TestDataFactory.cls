@@ -60,9 +60,9 @@ public class TestDataFactory {
         return properties;
     }
 
-    public static Property__c createProperty(Contact owner, Decimal sellingPrice, Decimal leasePrice, String Recordtype) {
+    public static Property__c createNewProperty(Contact owner, Decimal sellingPrice, Decimal leasePrice, String Recordtype) {
         Property__c properties = new Property__c(Property_Owner__c = owner.Id, Selling_Price__c = sellingPrice,
-                                        Lease_Price__c = leasePrice, Address__c = address, RecordTypeId = Recordtype);
+                                        Lease_Price__c = leasePrice, RecordTypeId = Recordtype);
         insert properties;
         return properties;
     }
@@ -82,7 +82,7 @@ public class TestDataFactory {
         return deal;
     }
 
-    public static Deal__c createDeal(Contact seller, Contact buyer,  Property__c sellingProperty, String status, String recordType) {
+    public static Deal__c createNewDeal(Contact seller, Contact buyer,  Property__c sellingProperty, String status, String recordType) {
         Deal__c deal = new Deal__c(Seller__c = seller.Id, Buyer__c = buyer.Id,  Selling_Property__c = sellingProperty.Id, Status__c = status, RecordTypeId = recordType);
         insert deal;
         return deal;
