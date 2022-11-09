@@ -13,7 +13,7 @@
             	margin: 8px 0;
             }
             table {
-                height: 100px;
+                height: 300px;
             	width: 100%; 
             }
             th {
@@ -21,22 +21,24 @@
             	text-align: center;
                 font-weight: bold;
             	font-size: 20px;
+            	height: 100px;
 			}
             td {
   				text-align: center;
+            	font-size: 20px;
 			}
             .stamp {
-                margin-top: 500px;
+                margin-top: 100px;
                 float:right;
                 width: 135px;
             }
         </style>
     </head>
     <body>
-        <h1 id="title">Property Owner Info Report</h1>
+        <h1 id="title">Property Owner Info Report</h1><br/><br/>
         <div class="info">
             <p><b>Property Owner Name:</b> {!Contact.Name}</p>
-            <p><b>Total Property Price($):</b> {!Contact.Total_Property_Price__c}</p>
+            <p><b>Total Property Price($):</b> {!Contact.Total_Property_Price__c}</p><br/>
         </div>
         <table border = "1">
             <thead>
