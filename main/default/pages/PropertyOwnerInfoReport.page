@@ -13,30 +13,12 @@
                 margin: 15px;
             }
             .info {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                font-size: 16px;
-            	margin: 8px 0;
-            }
-            table {
-                height: 100px;
-            	width: 100%; 
-            }
-            th {
-                background-color: #80b3ff;
-=======
-=======
->>>>>>> HomeWork_FE_2
                 font-weight: bold;
                 font-size: 15px;
             	padding: 15px;
             } 
             .header {
                 background-color: #4d94ff;
-<<<<<<< HEAD
->>>>>>> HomeWork_FE_1
-=======
->>>>>>> HomeWork_FE_2
             	text-align: center;
                 font-weight: bold;
             	font-size: 20px;
@@ -47,24 +29,11 @@
             	font-size: 20px;
 			}
             .stamp {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                margin-top: 500px;
-                float:right;
-                width: 135px;
-            }
-=======
-=======
->>>>>>> HomeWork_FE_2
                 display: flex;
                 justify-content: flex-end;
                 height: 96px;
                 width: 100%;
             }  
-<<<<<<< HEAD
->>>>>>> HomeWork_FE_1
-=======
->>>>>>> HomeWork_FE_2
         </style>
     </head>
     <body>
