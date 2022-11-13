@@ -31,7 +31,7 @@ public with sharing class PropertyOwnerInfoReportController {
        }
    }
    public List<DealWrapper> getDeals() {
-   List<Deal__c> dealsBySeller = DealManager.getDealsBySeller(new List<Id>{c.Id}, FIELDS);
+   List<Deal__c> dealsBySeller = DealManager.getDealsBySeller(new List<Id>{contact.Id}, FIELDS);
 
    Map<String, List<Deal__c>> dealsMap = new Map<String, List<Deal__c>>();
        
