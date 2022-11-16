@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Property Creation" icon-name="custom:custom24">
+        <template if:false={isPropertyRecordTypeSubmitted}>
+            <c-property-types 
+            onrecordtypesubmit={handleRecordTypeSubmit}
+            >
+        </c-property-types>
+        </template>
+        <template if:true={isPropertyRecordTypeSubmitted}>
+            <c-property-creation 
+                record-id={recordId} 
+                onrecordtypesubmit={handleRecordTypeSubmit}
+                >
+            </c-property-creation>   
+        </template>
+    </lightning-card>
+</template>
