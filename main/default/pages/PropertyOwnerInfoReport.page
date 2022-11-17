@@ -51,10 +51,10 @@
                 <apex:column styleClass="column" headerValue="Column 2" value="{!deal.totalDealAmount}"/>
                 <apex:column styleClass="column" headerValue="Column 3" value="{!deal.dealAmountAfterCommission}"/>
             </apex:pageBlockTable>
-            <div class="stamp">
-                <apex:image url="{! $Resource.Stamp}"/>
-            </div>
         </apex:pageBlock>
+	<div class="stamp">
+            <apex:image url="{! $Resource.Stamp}"/>
+        </div>
     </body>
 </apex:page>
 
