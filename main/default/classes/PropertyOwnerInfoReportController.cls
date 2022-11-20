@@ -2,7 +2,7 @@ public with sharing class PropertyOwnerInfoReportController {
 
     private final Contact contact;
 
-    private static final String FIELDS = 'Name, Sum_of_the_deal__c, Sum_after_commission__c, Status__c, Selling_Property__r.RecordTypeId';
+    private static final String FIELDS = 'Name, Sum_of_the_deal__c, Sum_after_commission__c, Status__c, Selling_Property__r.RecordType.Name, Selling_Property__r.RecordTypeId';
     
     public PropertyOwnerInfoReportController(ApexPages.StandardController stdController) {
         this.contact = (Contact)stdController.getRecord();
@@ -15,7 +15,7 @@ public with sharing class PropertyOwnerInfoReportController {
        public Decimal dealAmountAfterCommission {get;set;}
 
         public DealWrapper(List<Deal__c> deals) {
-            this.propertyRecordType = deals[0].Selling_Property__r.RecordTypeId;
+            this.propertyRecordType = deals[0].Selling_Property__r.RecordType.Name;
             this.numberOfWonDeals = 0;
             this.totalDealAmount = 0;
             this.dealAmountAfterCommission = 0;
@@ -36,10 +36,10 @@ public with sharing class PropertyOwnerInfoReportController {
    Map<String, List<Deal__c>> dealsMap = new Map<String, List<Deal__c>>();
        
         for(Deal__c deal : dealsBySeller) {
-            if(dealsMap.get(deal.Selling_Property__r.RecordTypeId) == null) {
-                dealsMap.put(deal.Selling_Property__r.RecordTypeId, new List<Deal__c>());
+            if(dealsMap.get(deal.Selling_Property__r.RecordType.Name) == null) {
+                dealsMap.put(deal.Selling_Property__r.RecordType.Name, new List<Deal__c>());
             }
-           dealsMap.get(deal.Selling_Property__r.RecordTypeId).add(deal);
+           dealsMap.get(deal.Selling_Property__r.RecordType.Name).add(deal);
        }
 
        List<DealWrapper> wrapper = new List<DealWrapper>();
