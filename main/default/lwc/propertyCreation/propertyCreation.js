@@ -8,18 +8,18 @@ export default class PropertyCreation extends LightningElement {
     @track elements = [{ id: 0 }];
 
     addRow() {
-        if (this.elements.length < 3) {
+        if (this.itemList.length < 3) {
             ++this.keyIndex;
-            let newElement = { id: this.keyIndex };
-            this.elements.push(newElement);
+            let newItem = { id: this.keyIndex };
+            this.itemList.push(newItem);
 
-            if (this.elements.length == 2) {
+            if (this.itemList.length == 2) {
                 Array.from(this.template.querySelectorAll('lightning-button-icon[name="delete"]')).forEach(element => {
                     element.disabled = false;
                 });
             }
 
-            if (this.elements.length == 3) {
+            if (this.itemList.length == 3) {
                 Array.from(this.template.querySelectorAll('lightning-button-icon[name="add"]')).forEach(element => {
                     element.disabled = true;
                 });
@@ -28,16 +28,16 @@ export default class PropertyCreation extends LightningElement {
     }
 
     deleteRow(event) {
-        if (this.elements.length > 1) {
-            this.elements = this.elements.filter(function (element) {
+        if (this.itemList.length > 1) {
+            this.itemList = this.itemList.filter(function (element) {
                 return element.id != parseInt(event.target.accessKey);
             });
 
-            if (this.elements.length == 1) {
+            if (this.itemList.length == 1) {
                 this.template.querySelector('lightning-button-icon[name="delete"]').disabled = true;
             }
 
-            if (this.elements.length == 2) {
+            if (this.itemList.length == 2) {
                 Array.from(this.template.querySelectorAll('lightning-button-icon[name="add"]')).forEach(element => {
                     element.disabled = false;
                 });
