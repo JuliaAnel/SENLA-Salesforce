@@ -5,6 +5,7 @@ export default class personInfo extends LightningElement {
 	people = PEOPLE
 	columns = COLUMNS
 	value = 'sortBy'
+	
 	optionsGender = [
 		{ label: 'Male', value: 'MALE', checked: null },
 		{ label: 'Female', value: 'FEMALE', checked: null },
@@ -14,18 +15,18 @@ export default class personInfo extends LightningElement {
 		return OPTIONS
 	}
 
-	handleChange(event) {
+	handleSortBy(event) {
 		this.value = event.detail.value
-		const result = JSON.parse(JSON.stringify(this.persons)).sort((a, b) => a[event.detail.value].localeCompare(b[event.detail.value]))
+		const result = JSON.parse(JSON.stringify(this.people)).sort((a, b) => a[event.detail.value].localeCompare(b[event.detail.value]))
 		this.people = result
 	}
 
 	handleChangeFrom(event){
 		const choosedDate = new Date(event.detail.value)
-		const result = this.persons.filter(item => {
+		const result = this.people.filter(item => {
 			return new Date(item.birthday) >= choosedDate
 		})
-		this.persons = result
+		this.people = result
 	}
 
 	handleChangeTo(event){
@@ -39,11 +40,11 @@ export default class personInfo extends LightningElement {
 	handleChangeGender(e){
 		const valueGender = e.target.name
 		if (valueGender === 'MALE') {
-			this.optionsGender[1].checked = 0
-			this.optionsGender[0].checked = 1
+			this.optionsGender[0].checked = true
+			this.optionsGender[1].checked = false
 		} else{
-				this.optionsGender[0].checked = 0
-				this.optionsGender[1].checked = 1
+				this.optionsGender[1].checked = true
+				this.optionsGender[0].checked = false
 			}
 		const result = people.filter(item => {
 		return item.gender === valueGender
