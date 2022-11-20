@@ -23,7 +23,8 @@
                                                 name="add"
                                                 access-key={element.id} 
                                                 onclick={addRow}
-                                                id={index}>
+                                                id={index}
+                                                disabled={isDisabledAddButton}>
                         </lightning-button-icon>
                     </lightning-layout-item>
                     <lightning-layout-item class="slds-p-around_small slds-m-top_large">
@@ -33,7 +34,8 @@
                                                 name="delete"
                                                 access-key={element.id} 
                                                 onclick={deleteRow}
-                                                id={index}>
+                                                id={index}
+                                                disabled={isDisabledDeleteButton}>
                         </lightning-button-icon>
                     </lightning-layout-item>
                 </lightning-layout>    

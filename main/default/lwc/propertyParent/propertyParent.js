@@ -2,13 +2,20 @@ import { LightningElement, api } from 'lwc';
 
 export default class PropertyParent extends LightningElement {
     propertyRecordType;
-    isPropertyRecordTypeSubmitted = false;
+    showPropertyTypePicker = true;
+    showPropertyFields = false;
 
     @api recordId;
     @api objectApiName;
 
     handleRecordTypeSubmit(event){
-        this.isPropertyRecordTypeSubmitted = event.detail.isPropertyRecordTypeSubmitted;
+        this.showPropertyTypePicker = false;
+        this.showPropertyFields = true;
         this.propertyRecordType = event.detail.propertyRecordType;
+    }
+
+    handleRecordCreation(event) {
+        this.showPropertyTypePicker = true;
+        this.showPropertyFields = false;
     }
 }

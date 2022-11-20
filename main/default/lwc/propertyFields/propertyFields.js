@@ -4,53 +4,50 @@ import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 export default class PropertyCreation extends LightningElement {
     @api recordId;
     keyIndex = 0;
-    
+
+    isDisabledAddButton = false;
+    isDisabledDeleteButton = true;
+
     @track elements = [{ id: 0 }];
 
     addRow() {
-        if (this.itemList.length < 3) {
+        if (this.elements.length < 3) {
             ++this.keyIndex;
             let newItem = { id: this.keyIndex };
-            this.itemList.push(newItem);
+            this.elements.push(newItem);
 
-            if (this.itemList.length == 2) {
-                Array.from(this.template.querySelectorAll('lightning-button-icon[name="delete"]')).forEach(element => {
-                    element.disabled = false;
-                });
+            if (this.elements.length == 2) {
+                this.isDisabledDeleteButton = false;
             }
 
-            if (this.itemList.length == 3) {
-                Array.from(this.template.querySelectorAll('lightning-button-icon[name="add"]')).forEach(element => {
-                    element.disabled = true;
-                });
+            if (this.elements.length == 3) {
+                this.isDisabledAddButton = true;
             }
         }
     }
 
     deleteRow(event) {
-        if (this.itemList.length > 1) {
-            this.itemList = this.itemList.filter(function (element) {
+        if (this.elements.length > 1) {
+            this.elements = this.elements.filter(function (element) {
                 return element.id != parseInt(event.target.accessKey);
             });
 
-            if (this.itemList.length == 1) {
-                this.template.querySelector('lightning-button-icon[name="delete"]').disabled = true;
+            if (this.elements.length == 1) {
+                this.isDisabledDeleteButton = true;
             }
 
-            if (this.itemList.length == 2) {
-                Array.from(this.template.querySelectorAll('lightning-button-icon[name="add"]')).forEach(element => {
-                    element.disabled = false;
-                });
+            if (this.elements.length == 2) {
+                this.isDisabledAddButton = true;
             }
         }
     }
 
     handleSubmit() {
-        let isVal = true;
+        let isPropertyValid = true;
         this.template.querySelectorAll('lightning-input-field').forEach(element => {
-            isVal = isVal && element.reportValidity();
+            isPropertyValid = isPropertyValid && element.reportValidity();
         });
-        if (isVal) {
+        if (isPropertyValid) {
             try {
                 this.template.querySelectorAll('lightning-record-edit-form').forEach(element => {
                     element.submit();
@@ -67,10 +64,7 @@ export default class PropertyCreation extends LightningElement {
         this.keyIndex = 0;
         this.elements = [{ id: 0 }];
 
-        this.dispatchEvent(new CustomEvent("recordtypesubmit", {
-            detail: {
-                isPropertyRecordTypeSubmitted: false,
-            }
+        this.dispatchEvent(new CustomEvent("recordcreation", {
         }));
     }
 

@@ -3,7 +3,8 @@ import { getObjectInfo } from 'lightning/uiObjectInfoApi';
 
 import PROPERTY_OBJECT from '@salesforce/schema/Property__c';
 
-export default class PropertyTypes extends LightningElement {
+export default class PropertyRecordTypes extends LightningElement {
+    
     propertyRecordType;
 
     @wire(getObjectInfo, { objectApiName: PROPERTY_OBJECT })
@@ -24,7 +25,7 @@ export default class PropertyTypes extends LightningElement {
         return recordsTypeArray;
     }
     
-    checkHandle(event) {
+    handleCheck(event) {
         Array.from(
             this.template.querySelectorAll('[data-id="record_type_checkbox"]')).forEach(element => {
             element.checked = false;
@@ -36,7 +37,8 @@ export default class PropertyTypes extends LightningElement {
     submitRecordType(event) {
         this.dispatchEvent(new CustomEvent("recordtypesubmit", {
             detail: {
-                isPropertyRecordTypeSubmitted: true,
+                showPropertyTypePicker: false,
+                showPropertyFields: true,
                 propertyRecordType: this.propertyRecordType,
             }
         }));
