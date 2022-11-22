@@ -1,0 +1,88 @@
+<template>
+    <lightning-card title="Property Creation" icon-name="standard:agent_home">
+        <template if:true={showPropertyTypePicker}>
+            <lightning-card title="Choose record type:">
+                <div class="slds-p-around_medium">
+                    <template for:each={recordTypes} for:item="property">                   
+                        <lightning-input 
+                            class="slds-m-vertical_x-small"
+                            key={property.value} 
+                            type="checkbox" 
+                            label={property.name} 
+                            name={property.value} 
+                            data-id="record_type_checkbox" 
+                            checked={property.checked} 
+                            onclick={handleCheck}>
+                        </lightning-input>
+                    </template>
+                    </br>
+                    <lightning-button 
+                        class="slds-m-top_medium" 
+                        variant="brand" 
+                        label="Next" 
+                        onclick={submitRecordType}>
+                    </lightning-button>
+                </div>
+            </lightning-card>
+        </template>
+        <template if:true={showPropertyFields}>
+            <lightning-card>
+                <template for:each={elements} for:item="element" for:index="index">
+                    <lightning-record-edit-form class="slds-p-around_small" key={element.id} object-api-name="Property__c">
+                        <lightning-messages> </lightning-messages> 
+                        <lightning-layout>
+                            <lightning-layout-item class="slds-p-around_small">                 
+                                <lightning-input-field field-name="Name__c"></lightning-input-field>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-around_small">
+                                <lightning-input-field field-name="Address__c"></lightning-input-field>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-around_small">
+                                <lightning-input-field field-name="Lease_Price__c"></lightning-input-field>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-around_small">
+                                <lightning-input-field field-name="Property_Owner__c" value={recordId} disabled="true"></lightning-input-field>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-around_small slds-m-top_large">
+                                <lightning-button-icon  class="slds-m-top_large"
+                                                        icon-name="action:new"    
+                                                        alternative-text="Add Row" 
+                                                        name="add"
+                                                        access-key={element.id} 
+                                                        onclick={addRow}
+                                                        id={index}
+                                                        disabled={isDisabledAddButton}>
+                                </lightning-button-icon>
+                            </lightning-layout-item>
+                            <lightning-layout-item class="slds-p-around_small slds-m-top_large">
+                                <lightning-button-icon  class="slds-m-top_large"
+                                                        icon-name="action:delete"
+                                                        alternative-text="Delete Row" 
+                                                        name="delete"
+                                                        access-key={element.id} 
+                                                        onclick={deleteRow}
+                                                        id={index}
+                                                        disabled={isDisabledDeleteButton}>
+                                </lightning-button-icon>
+                            </lightning-layout-item>
+                        </lightning-layout>    
+                    </lightning-record-edit-form>
+                </template>
+                </br>
+                <div class="slds-p-around_medium">
+                    <lightning-button 
+                        class="slds-m-right_x-small" 
+                        label="Submit" variant="success" 
+                        onclick={handleSubmit}>
+                    </lightning-button>
+                    <lightning-button 
+                        class="slds-m-right_x-small" 
+                        label="Cancel" 
+                        variant="text-destructive" 
+                        onclick={handleCancel}>
+                    </lightning-button>
+                </div>
+            </lightning-card> 
+        </template>
+    </lightning-card>
+</template>

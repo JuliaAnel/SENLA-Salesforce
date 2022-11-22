@@ -1,9 +1,10 @@
 import { LightningElement } from 'lwc';
-import { PEOPLE, COLUMNS, OPTIONS, GENDER_MALE, GENDER_FEMALE, SORT_BY, ELEMENT_TYPE_CHECKBOX } from 'c/utils';
+import { PEOPLE, COLUMNS, OPTIONS, ELEMENT_TYPE_CHECKBOX, SORT_BY, GENDER_MALE, GENDER_FEMALE } from 'c/utils';
 
 export default class personInfo extends LightningElement {
 	people = PEOPLE
 	columns = COLUMNS
+	value = SORT_BY
 	
 	optionsGender = [
 		{ label: 'Male', value: GENDER_MALE, checked: null },
