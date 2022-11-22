@@ -1,5 +1,6 @@
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import CREATED_DATE from "@salesforce/schema/LogLWC__c.CreatedDate";
+import PROPERTY_OBJECT from '@salesforce/schema/Property__c';
 
 const SUCCESS_TITLE = "Property creation";
 const SUCCESS_MESSAGE = "Property is successfully created";
@@ -81,5 +82,6 @@ export {
 	ELEMENT_TYPE_CHECKBOX,
 	SORT_BY,
 	GENDER_MALE,
-	GENDER_FEMALE};
+	GENDER_FEMALE,
+	PROPERTY_OBJECT};
 

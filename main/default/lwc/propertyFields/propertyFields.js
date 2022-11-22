@@ -1,5 +1,11 @@
 import { LightningElement, api, track } from 'lwc';
-import { SUCCESS_TITLE, SUCCESS_MESSAGE, SUCCESS_VARIANT, ERROR_TITLE, ERROR_VARIANT, showNotification } from 'c/utils';
+import { SUCCESS_TITLE, 
+    SUCCESS_MESSAGE, 
+    SUCCESS_VARIANT, 
+    ERROR_TITLE, 
+    ERROR_VARIANT, 
+    showNotification
+    } from 'c/utils';
 
 export default class PropertyCreation extends LightningElement {
     @api recordId;
@@ -52,11 +58,10 @@ export default class PropertyCreation extends LightningElement {
                 this.template.querySelectorAll('lightning-record-edit-form').forEach(element => {
                     element.submit();
                 });
-
-                this.displaySuccess();
+                showNotification(this, SUCCESS_TITLE, SUCCESS_MESSAGE, SUCCESS_VARIANT);
                 this.handleCancel();
             } catch(error) {
-                this.displayError(error);
+                showNotification(this, ERROR_TITLE, error.getMessage(), ERROR_VARIANT);
             }
         } 
     }
@@ -66,13 +71,5 @@ export default class PropertyCreation extends LightningElement {
 
         this.dispatchEvent(new CustomEvent("recordcreation", {
         }));
-    }
-
-    displaySuccess() {
-        showNotification(this, SUCCESS_TITLE, SUCCESS_MESSAGE, SUCCESS_VARIANT);
-    }
-
-    displayError(error) {
-        showNotification(this, ERROR_TITLE, error.getMessage(), ERROR_VARIANT);
     }
 }
