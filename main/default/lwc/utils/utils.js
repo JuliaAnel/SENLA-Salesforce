@@ -1,3 +1,19 @@
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
+import PROPERTY_OBJECT from '@salesforce/schema/Property__c';
+
+const SUCCESS_TITLE = "Property creation";
+const SUCCESS_MESSAGE = "Property is successfully created";
+const SUCCESS_VARIANT = "success";
+const ERROR_TITLE = "Property is not created";
+const ERROR_VARIANT = "destructive";
+const STANDARD_RECORD_PAGE = 'standard__recordPage';
+const PAGE_ACTION_NAME_VIEW = 'view';
+const OBJECT_API_NAME_CONTACT = 'Contact';
+const ELEMENT_TYPE_CHECKBOX = 'checkbox';
+const SORT_BY = 'sortby';
+const GENDER_MALE = 'MALE';
+const GENDER_FEMALE = 'FEMALE';
+
 const PEOPLE = [
 	{Id:1, lastName: 'Rush', firstName: 'Stefania', gender: 'FEMALE', birthday: '10.09.2005', email: 'Stefania@com'},
 	{Id:2, lastName:'Hughie', firstName: 'Simon', gender: 'MALE', birthday: '11.02.1985', email: 'Hughie@com'},
@@ -22,11 +38,34 @@ const COLUMNS = [
 ]
 
 const OPTIONS = [
-	{ label: 'First Name', value: 'firstName' },
-	{ label: 'Last Name', value: 'lastName' },
-	{ label: 'Email', value: 'email' },
-]
+    { label: 'First Name', value: 'firstName' },
+    { label: 'Last Name', value: 'lastName' },
+    { label: 'Email', value: 'email' },
+];
 
-export {PEOPLE, COLUMNS, OPTIONS};
+const showNotification = (page, title, message, variant) => {
+	const toastEvent = new ShowToastEvent({
+	  title,
+	  message,
+	  variant
+	});
+	page.dispatchEvent(toastEvent);
+  };
 
-	
+export {OPTIONS,
+	 	PEOPLE, 
+	 	COLUMNS,
+		PROPERTY_OBJECT,
+		SUCCESS_TITLE,
+		SUCCESS_MESSAGE,
+		SUCCESS_VARIANT,
+		ERROR_TITLE,
+		ERROR_VARIANT,
+		STANDARD_RECORD_PAGE,
+		PAGE_ACTION_NAME_VIEW,
+		OBJECT_API_NAME_CONTACT,
+		ELEMENT_TYPE_CHECKBOX,
+		SORT_BY,
+		GENDER_MALE,
+		GENDER_FEMALE,
+		showNotification};

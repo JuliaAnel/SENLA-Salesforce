@@ -1,7 +1,7 @@
 import { LightningElement, api, wire } from 'lwc';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import { NavigationMixin } from 'lightning/navigation';
-
+import { STANDARD_RECORD_PAGE, PAGE_ACTION_NAME_VIEW, OBJECT_API_NAME_CONTACT } from 'c/utils';
 import OWNER_FIRST_NAME from '@salesforce/schema/Property__c.Property_Owner__r.FirstName';
 import OWNER_LAST_NAME from '@salesforce/schema/Property__c.Property_Owner__r.LastName';
 import OWNER_PHONE from '@salesforce/schema/Property__c.Property_Owner__r.Phone';
@@ -45,11 +45,11 @@ export default class PropertyOwnerInfo extends NavigationMixin(LightningElement)
     navigateToOwnerPage(event) {
         event.preventDefault();
         this[NavigationMixin.Navigate]({
-          type: 'standard__recordPage',
+          type: STANDARD_RECORD_PAGE,
             attributes: {
                 recordId: getFieldValue(this.owner.data, PROPERTY_OWNER),
-                objectApiName:'Contact',
-                actionName: 'view'
+                objectApiName: OBJECT_API_NAME_CONTACT,
+                actionName: PAGE_ACTION_NAME_VIEW
             },
         });
     }
