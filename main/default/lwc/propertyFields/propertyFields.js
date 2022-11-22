@@ -1,5 +1,5 @@
 import { LightningElement, api, track } from 'lwc';
-import { showNotification, SUCCESS_TITLE, SUCCESS_MESSAGE, SUCCESS_VARIANT, ERROR_TITLE, ERROR_VARIANT } from '../utils/utils';
+import { showNotification, SUCCESS_TITLE, SUCCESS_MESSAGE, SUCCESS_VARIANT, ERROR_TITLE, ERROR_VARIANT } from 'c/utils';
 
 export default class PropertyCreation extends LightningElement {
     @api recordId;
