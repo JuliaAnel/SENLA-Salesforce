@@ -1,5 +1,5 @@
 import { LightningElement, api, track } from 'lwc';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { showNotification, SUCCESS_TITLE, SUCCESS_MESSAGE, SUCCESS_VARIANT, ERROR_TITLE, ERROR_VARIANT } from '../utils/utils';
 
 export default class PropertyCreation extends LightningElement {
     @api recordId;
@@ -52,11 +52,10 @@ export default class PropertyCreation extends LightningElement {
                 this.template.querySelectorAll('lightning-record-edit-form').forEach(element => {
                     element.submit();
                 });
-
-                this.displaySuccess();
+                showNotification(this, SUCCESS_TITLE, SUCCESS_MESSAGE, SUCCESS_VARIANT);
                 this.handleCancel();
             } catch(error) {
-                this.displayError(error);
+                showNotification(this, ERROR_TITLE, error.getMessage(), ERROR_VARIANT);
             }
         } 
     }
@@ -66,23 +65,5 @@ export default class PropertyCreation extends LightningElement {
 
         this.dispatchEvent(new CustomEvent("recordcreation", {
         }));
-    }
-
-    displaySuccess() {
-        const toastEvent = new ShowToastEvent({
-            title: "Property creation",
-            message: "Property is successfully created",
-            variant: "success"
-        });
-        this.dispatchEvent(toastEvent);
-    }
-
-    displayError(error) {
-        const toastEvent = new ShowToastEvent({
-            title: "Property is not created",
-            message: error.getMessage(),
-            variant: "destructive"
-        });
-        this.dispatchEvent(toastEvent);
     }
 }

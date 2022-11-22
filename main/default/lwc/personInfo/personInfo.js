@@ -1,14 +1,13 @@
 import { LightningElement } from 'lwc';
-import { PEOPLE, COLUMNS, OPTIONS } from 'c/utils';
+import { PEOPLE, COLUMNS, OPTIONS, GENDER_MALE, GENDER_FEMALE, SORT_BY, ELEMENT_TYPE_CHECKBOX } from 'c/utils';
 
 export default class personInfo extends LightningElement {
 	people = PEOPLE
 	columns = COLUMNS
-	 value = 'sortBy'
 	
 	optionsGender = [
-		{ label: 'Male', value: 'MALE', checked: null },
-		{ label: 'Female', value: 'FEMALE', checked: null },
+		{ label: 'Male', value: GENDER_MALE, checked: null },
+		{ label: 'Female', value: GENDER_FEMALE, checked: null },
 	]
 
 	get options() {
@@ -16,7 +15,7 @@ export default class personInfo extends LightningElement {
 	}
 
 	handleSortBy(event) {
-		this.value = event.detail.value
+		SORT_BY = event.detail.value
 		const result = JSON.parse(JSON.stringify(this.people)).sort((a, b) => a[event.detail.value].localeCompare(b[event.detail.value]))
 		this.people = result
 	}
@@ -39,7 +38,7 @@ export default class personInfo extends LightningElement {
 
 	handleChangeGender(e){
 		const valueGender = e.target.name
-		if (valueGender === 'MALE') {
+		if (valueGender === GENDER_MALE) {
 			this.optionsGender[0].checked = true
 			this.optionsGender[1].checked = false
 		} else{
@@ -62,7 +61,7 @@ export default class personInfo extends LightningElement {
 	handleReset(){
 		this.value = ''
 		this.template.querySelectorAll('lightning-input').forEach(element => {
-			if (element.type === 'checkbox'){
+			if (element.type === ELEMENT_TYPE_CHECKBOX){
 				element.checked = false
 			} else {
 				element.value = null
