@@ -4,6 +4,7 @@ import { PEOPLE, COLUMNS, OPTIONS, GENDER_MALE, GENDER_FEMALE, SORT_BY, ELEMENT_
 export default class personInfo extends LightningElement {
 	people = PEOPLE
 	columns = COLUMNS
+	value = SORT_BY
 	
 	optionsGender = [
 		{ label: 'Male', value: GENDER_MALE, checked: null },
@@ -15,7 +16,7 @@ export default class personInfo extends LightningElement {
 	}
 
 	handleSortBy(event) {
-		SORT_BY = event.detail.value
+		this.value = event.detail.value
 		const result = JSON.parse(JSON.stringify(this.people)).sort((a, b) => a[event.detail.value].localeCompare(b[event.detail.value]))
 		this.people = result
 	}
