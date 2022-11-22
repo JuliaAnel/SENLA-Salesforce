@@ -1,5 +1,5 @@
 import { LightningElement, api, track } from 'lwc';
-import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { SUCCESS_TITLE, SUCCESS_MESSAGE, SUCCESS_VARIANT, ERROR_TITLE, ERROR_VARIANT, showNotification } from 'c/utils';
 
 export default class PropertyCreation extends LightningElement {
     @api recordId;
@@ -69,20 +69,10 @@ export default class PropertyCreation extends LightningElement {
     }
 
     displaySuccess() {
-        const toastEvent = new ShowToastEvent({
-            title: "Property creation",
-            message: "Property is successfully created",
-            variant: "success"
-        });
-        this.dispatchEvent(toastEvent);
+        showNotification(this, SUCCESS_TITLE, SUCCESS_MESSAGE, SUCCESS_VARIANT);
     }
 
     displayError(error) {
-        const toastEvent = new ShowToastEvent({
-            title: "Property is not created",
-            message: error.getMessage(),
-            variant: "destructive"
-        });
-        this.dispatchEvent(toastEvent);
+        showNotification(this, ERROR_TITLE, error.getMessage(), ERROR_VARIANT);
     }
 }
