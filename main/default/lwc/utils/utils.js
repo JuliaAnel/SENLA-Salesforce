@@ -6,7 +6,7 @@ import OWNER_EMAIL from '@salesforce/schema/Property__c.Property_Owner__r.Email'
 import OWNER_TOTAL_PROPERTY_PRICE from '@salesforce/schema/Property__c.Property_Owner__r.Total_Property_Price__c';
 import PROPERTY_OWNER from '@salesforce/schema/Property__c.Property_Owner__c';
 import CONTACT_OBJECT from '@salesforce/schema/Contact';
-const SORT_BY = 'sortby';
+const SORT_BY = 'sortBy';
 const GENDER_MALE = 'MALE';
 const GENDER_FEMALE = 'FEMALE';
 const ELEMENT_TYPE_CHECKBOX = 'checkbox';
