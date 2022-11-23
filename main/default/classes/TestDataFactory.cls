@@ -112,4 +112,21 @@ public class TestDataFactory {
         insert logs;
         return logs;
     }
+
+
+    public static LogLWC__c createLogLWC (String objectType,
+                                        String actionType, 
+                                        String description, 
+                                        Boolean isSuccessful, 
+                                        String errorMessage) {
+        LogLWC__c log = new LogLWC__c();
+        log.ObjectType__c = objectType;
+        log.ActionType__c = actionType;
+        log.Description__c = description;
+        log.IsSuccessful__c = isSuccessful;
+        log.ErrorMessage__c = errorMessage;
+
+        insert log;
+        return log;
+    }
 }
