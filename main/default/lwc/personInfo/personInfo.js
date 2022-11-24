@@ -43,11 +43,11 @@ export default class personInfo extends LightningElement {
   	handleChangeGender(e) {
     	const valueGender = e.target.name;
     	if (valueGender === GENDER_MALE) {
-      	this.optionsGender[1].checked = 0;
-      	this.optionsGender[0].checked = 1;
+      	this.optionsGender[0].checked = true;
+      	this.optionsGender[1].checked = false;
     	} else {
-      	this.optionsGender[0].checked = 0;
-      	this.optionsGender[1].checked = 1;
+      	this.optionsGender[1].checked = true;
+      	this.optionsGender[0].checked = false;
     	}
     	const resultFilterByGender = this.people.filter((item) => {
       	return item.gender === valueGender;
