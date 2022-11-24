@@ -1,5 +1,13 @@
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 import PROPERTY_OBJECT from '@salesforce/schema/Property__c';
+import OWNER_FIRST_NAME from '@salesforce/schema/Property__c.Property_Owner__r.FirstName';
+import OWNER_LAST_NAME from '@salesforce/schema/Property__c.Property_Owner__r.LastName';
+import OWNER_PHONE from '@salesforce/schema/Property__c.Property_Owner__r.Phone';
+import OWNER_HOME_PHONE from '@salesforce/schema/Property__c.Property_Owner__r.HomePhone';
+import OWNER_EMAIL from '@salesforce/schema/Property__c.Property_Owner__r.Email';
+import OWNER_TOTAL_PROPERTY_PRICE from '@salesforce/schema/Property__c.Property_Owner__r.Total_Property_Price__c';
+import PROPERTY_OWNER from '@salesforce/schema/Property__c.Property_Owner__c';
+import CONTACT_OBJECT from '@salesforce/schema/Contact';
 
 const SUCCESS_TITLE = "Property creation";
 const SUCCESS_MESSAGE = "Property is successfully created";
@@ -8,9 +16,8 @@ const ERROR_TITLE = "Property is not created";
 const ERROR_VARIANT = "destructive";
 const STANDARD_RECORD_PAGE = 'standard__recordPage';
 const PAGE_ACTION_NAME_VIEW = 'view';
-const OBJECT_API_NAME_CONTACT = 'Contact';
 const ELEMENT_TYPE_CHECKBOX = 'checkbox';
-const SORT_BY = 'sortby';
+const SORT_BY = 'sortBy';
 const GENDER_MALE = 'MALE';
 const GENDER_FEMALE = 'FEMALE';
 
@@ -63,9 +70,16 @@ export {OPTIONS,
 		ERROR_VARIANT,
 		STANDARD_RECORD_PAGE,
 		PAGE_ACTION_NAME_VIEW,
-		OBJECT_API_NAME_CONTACT,
 		ELEMENT_TYPE_CHECKBOX,
 		SORT_BY,
 		GENDER_MALE,
 		GENDER_FEMALE,
-		showNotification};
+		showNotification,
+        OWNER_FIRST_NAME,
+        OWNER_LAST_NAME,
+        OWNER_PHONE,
+        OWNER_HOME_PHONE,
+        OWNER_EMAIL,
+        OWNER_TOTAL_PROPERTY_PRICE,
+        PROPERTY_OWNER,
+        CONTACT_OBJECT};
