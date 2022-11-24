@@ -14,14 +14,15 @@
 			<div class="slds-clearfix">
 				<template for:each={optionsGender} for:item="gender">
 					<lightning-input
-					  class="slds-float_left slds-m-around_x-small"
-					  key={gender.value}
-					  name={gender.value}
-					  label={gender.label}
-					  type="checkbox"
-					  value={gender.value}
-					  checked={gender.checked}
-					  onchange={handleChangeGender}
+					  	class="slds-float_left slds-m-around_x-small"
+					  	style="top: 38px"
+					  	key={gender.value}
+					  	name={gender.value}
+					  	label={gender.label}
+					  	type="checkbox"
+					  	value={gender.value}
+					  	checked={gender.checked}
+					  	onchange={handleChangeGender}
 					>
 					</lightning-input>
 				  </template>
@@ -32,7 +33,7 @@
                     onchange={handleChangeEmail}>
             </lightning-input>
 	    </div>
-            <lightning-button class="slds-float_right slds-m-around_small" label="Reset All" name="id" onclick={handleReset}></lightning-button>
+            <lightning-button class="slds-float_right slds-m-around_small" label="Reset All" name="id" variant="brand" onclick={handleReset}></lightning-button>
         </div>     
 	    <div class="slds-p-around_small">
 		    <lightning-datatable
