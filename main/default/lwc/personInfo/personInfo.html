@@ -1,5 +1,5 @@
 <template>
-    <lightning-card title="Person information" icon-name="standard:people">
+    <lightning-card title="Person information">
 	    <div class="slds-clearfix">
 		    <lightning-combobox class="slds-float_left slds-m-around_x-small"
 			    name="sortBy"
@@ -11,17 +11,29 @@
 		    </lightning-combobox>
             <lightning-input class="slds-float_left slds-m-around_x-small" type="date" name="From" data-id="fromSort" label="From" onchange={handleChangeFrom}></lightning-input>
             <lightning-input class="slds-float_left slds-m-around_x-small" type="date" name="To" data-id="toSort" label="To" onchange={handleChangeTo}></lightning-input>
-			<lightning-input id="maleBox" class="slds-float_left slds-m-around_x-small" type="checkbox" label="Male" name="MALE" data-id="checkbox" onclick={handleChangeGender}></lightning-input>
-            <lightning-input id="femaleBox" class="slds-float_left slds-m-around_x-small" type="checkbox" label="Female" name="FEMALE" data-id="checkbox" onclick={handleChangeGender}></lightning-input>
+			<div class="slds-clearfix">
+				<template for:each={optionsGender} for:item="gender">
+					<lightning-input
+					  	class="slds-float_left slds-m-around_x-small"
+					  	style="top: 38px"
+					  	key={gender.value}
+					  	name={gender.value}
+					  	label={gender.label}
+					  	type="checkbox"
+					  	value={gender.value}
+					  	checked={gender.checked}
+					  	onchange={handleChangeGender}
+					>
+					</lightning-input>
+				  </template>
             <lightning-input class="slds-float_right slds-m-around_small" field-name="Email" type="email" data-id="emailInput" placeholder="user@salesforce.com"
                     maxlength="125" 
                     message-when-too-long="Email cannot be longer than 125 characters."
                     pattern=".+@salesforce.com"
                     onchange={handleChangeEmail}>
-            </lightning-input> 
-			</div>
-			<div>
-            <lightning-button class="slds-float_right slds-m-around_small" label="Reset All" name="id" onclick={handleReset}></lightning-button>
+            </lightning-input>
+	    </div>
+            <lightning-button class="slds-float_right slds-m-around_small" label="Reset All" name="id" variant="brand" onclick={handleReset}></lightning-button>
         </div>     
 	    <div class="slds-p-around_small">
 		    <lightning-datatable
