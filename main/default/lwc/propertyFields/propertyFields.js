@@ -1,5 +1,11 @@
 import { LightningElement, api, track } from 'lwc';
-import { showNotification, SUCCESS_TITLE, SUCCESS_MESSAGE, SUCCESS_VARIANT, ERROR_TITLE, ERROR_VARIANT } from 'c/utils';
+import { SUCCESS_TITLE, 
+    SUCCESS_MESSAGE, 
+    SUCCESS_VARIANT, 
+    ERROR_TITLE, 
+    ERROR_VARIANT, 
+    showNotification
+    } from 'c/utils';
 
 export default class PropertyCreation extends LightningElement {
     @api recordId;
@@ -16,11 +22,11 @@ export default class PropertyCreation extends LightningElement {
             let newItem = { id: this.keyIndex };
             this.elements.push(newItem);
 
-            if (this.elements.length == 2) {
+            if (this.elements.length > 1) {
                 this.isDisabledDeleteButton = false;
             }
 
-            if (this.elements.length == 3) {
+            if (this.elements.length > 2) {
                 this.isDisabledAddButton = true;
             }
         }
@@ -32,12 +38,12 @@ export default class PropertyCreation extends LightningElement {
                 return element.id != parseInt(event.target.accessKey);
             });
 
-            if (this.elements.length == 1) {
+            if (this.elements.length < 2) {
                 this.isDisabledDeleteButton = true;
             }
 
-            if (this.elements.length == 2) {
-                this.isDisabledAddButton = true;
+            if (this.elements.length < 3) {
+                this.isDisabledAddButton = false;
             }
         }
     }
