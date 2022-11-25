@@ -1,7 +1,7 @@
 <template>
     <lightning-card title="Person information">
 	    <div class="slds-clearfix">
-		    <lightning-combobox class="slds-float_left slds-m-around_x-small"
+		    <lightning-combobox class="slds-float_left slds-m-around_xx-small"
 			    name="sortBy"
 			    label="Sort by"
 			    value={value}
@@ -9,29 +9,22 @@
 			    options={options}
 			    onchange={handleSortBy}>
 		    </lightning-combobox>
-            <lightning-input class="slds-float_left slds-m-around_x-small" type="date" name="From" data-id="fromSort" label="From" onchange={handleChangeFrom}></lightning-input>
-            <lightning-input class="slds-float_left slds-m-around_x-small" type="date" name="To" data-id="toSort" label="To" onchange={handleChangeTo}></lightning-input>
-			<div class="slds-clearfix">
-				<template for:each={optionsGender} for:item="gender">
-					<lightning-input
-					  	class="slds-float_left slds-m-around_x-small"
-					  	style="top: 38px"
-					  	key={gender.value}
-					  	name={gender.value}
-					  	label={gender.label}
-					  	type="checkbox"
-					  	value={gender.value}
-					  	checked={gender.checked}
-					  	onchange={handleChangeGender}
-					>
-					</lightning-input>
-				  </template>
-            <lightning-input class="slds-float_right slds-m-around_small" field-name="Email" type="email" data-id="emailInput" placeholder="user@salesforce.com"
-                    maxlength="125" 
-                    message-when-too-long="Email cannot be longer than 125 characters."
-                    pattern=".+@salesforce.com"
-                    onchange={handleChangeEmail}>
+            <lightning-input class="slds-float_left slds-m-around_xx-small" type="date" name="From" data-id="fromSort" label="From" onchange={handleChangeFrom}></lightning-input>
+            <lightning-input class="slds-float_left slds-m-around_xx-small" type="date" name="To" data-id="toSort" label="To" onchange={handleChangeTo}></lightning-input>
+		<div class="slds-clearfix">
+			<lightning-input class="slds-float_right slds-m-around_xx-small" field-name="Email" type="email" data-id="emailInput" placeholder="user@salesforce.com"
+                maxlength="125" 
+                message-when-too-long="Email cannot be longer than 125 characters."
+                pattern=".+@salesforce.com"
+                onchange={handleChangeEmail}>
             </lightning-input>
+			<lightning-radio-group class="slds-float_left slds-m-around_xx-small"
+				name="radioGroup"		
+                options={optionsGender}
+                value={selectedgender}
+                type="radio"
+				onchange={handleChangeGender}>
+			</lightning-radio-group>    
 	    </div>
             <lightning-button class="slds-float_right slds-m-around_small" label="Reset All" name="id" variant="brand" onclick={handleReset}></lightning-button>
         </div>     

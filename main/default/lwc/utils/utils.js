@@ -6,14 +6,13 @@ import OWNER_EMAIL from '@salesforce/schema/Property__c.Property_Owner__r.Email'
 import OWNER_TOTAL_PROPERTY_PRICE from '@salesforce/schema/Property__c.Property_Owner__r.Total_Property_Price__c';
 import PROPERTY_OWNER from '@salesforce/schema/Property__c.Property_Owner__c';
 import CONTACT_OBJECT from '@salesforce/schema/Contact';
-const SORT_BY = 'sortBy';
+import { NavigationMixin } from 'lightning/navigation';
 const GENDER_MALE = 'MALE';
 const GENDER_FEMALE = 'FEMALE';
-const ELEMENT_TYPE_CHECKBOX = 'checkbox';
 const VALUE = '';
 const STANDARD_RECORD_PAGE = 'standard__recordPage';
 const PAGE_ACTION_NAME_VIEW = 'view';
-
+const RADIO = 'radio';
 const PROPERTY_OWNER_FIELDS = [OWNER_FIRST_NAME, OWNER_LAST_NAME, OWNER_PHONE, OWNER_HOME_PHONE, OWNER_EMAIL, OWNER_TOTAL_PROPERTY_PRICE, PROPERTY_OWNER];
 
 const PEOPLE = [
@@ -45,13 +44,22 @@ const OPTIONS = [
     { label: 'Email', value: 'email' },
 ];
 
+function navigateTo(fromPage, type, recordId, objectApiName, actionName) {
+    fromPage[NavigationMixin.Navigate]({
+        type: type,
+        attributes: {
+            recordId: recordId,
+            objectApiName: objectApiName,
+            actionName: actionName,
+        },
+    });
+}
+
 export {PEOPLE,
         COLUMNS,
         OPTIONS,
-        SORT_BY,
         GENDER_MALE,
         GENDER_FEMALE,
-        ELEMENT_TYPE_CHECKBOX,
         VALUE,
         STANDARD_RECORD_PAGE,
         PAGE_ACTION_NAME_VIEW,
@@ -63,4 +71,6 @@ export {PEOPLE,
         OWNER_HOME_PHONE,
         OWNER_EMAIL,
         OWNER_TOTAL_PROPERTY_PRICE,
-        PROPERTY_OWNER}
+        PROPERTY_OWNER,
+		navigateTo,
+		RADIO}
