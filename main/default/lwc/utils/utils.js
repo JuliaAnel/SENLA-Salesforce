@@ -11,6 +11,7 @@ import PROPERTY_OWNER from '@salesforce/schema/Property__c.Property_Owner__c';
 import CONTACT_OBJECT from '@salesforce/schema/Contact';
 import { NavigationMixin } from 'lightning/navigation';
 
+const ACTION_TYPE_INSERT = 'Insert';
 const SUCCESS_TITLE = "Property creation";
 const SUCCESS_MESSAGE = "Property is successfully created";
 const SUCCESS_VARIANT = "success";
@@ -85,6 +86,7 @@ function navigateTo(fromPage, type, recordId, objectApiName, actionName) {
 export {
 	OPTIONS,
 	navigateTo, 
+	ACTION_TYPE_INSERT,
 	PEOPLE, 
 	COLUMNS, 
 	SUCCESS_TITLE,

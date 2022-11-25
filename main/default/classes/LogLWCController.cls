@@ -1,21 +1,28 @@
 public with sharing class LogLWCController {
 
-    @AuraEnabled(cacheable=false)
-    public static LogLWC__c createLogLWC(String objectType, 
-                                        String actionType, 
-                                        String description, 
-                                        String errorMessage){
-        
-            LogLWCManager.LogLWCWrapper wrapper = new LogLWCManager.LogLWCWrapper();
-            wrapper.objectType = objectType;
-            wrapper.actionType = actionType;
-            wrapper.description = description;
-            wrapper.isSuccessful = String.isEmpty(errorMessage) ? true : false;
-            wrapper.errorMessage = errorMessage;    
+    public class LogLWCWrapper{
+        @AuraEnabled
+        public String objectType {get; set;}
+        @AuraEnabled
+        public String actionType {get; set;}
+        @AuraEnabled
+        public String description {get; set;}
+        @AuraEnabled
+        public Boolean isSuccessful {get; set;}
+        @AuraEnabled
+        public String errorMessage {get; set;}
+    }
 
+    @AuraEnabled(cacheable=false)
+    public static LogLWC__c createLogLWC(LogLWCWrapper wrapper){
+        try {
+            wrapper.isSuccessful = String.isEmpty(wrapper.errorMessage) ? true : false;            
             LogLWC__c log = LogLWCManager.createLog(wrapper, true);
-            return log;   
+            return log;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
         }
+    }
 
     @AuraEnabled(cacheable=true)
     public static List<LogLWC__c> getLogsLWC(String fields){

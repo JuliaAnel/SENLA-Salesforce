@@ -11,8 +11,8 @@ private class LogLWCManager_Test {
         LogLWC__c log4 = TestDataFactory.createLogLWC('Property__c', 'Insert', 'description', true, '');
     }
     
-    @isTest static void createLogLWC(){
-        LogLWCManager.LogLWCWrapper wrapper = new LogLWCManager.LogLWCWrapper();
+    @isTest static void createLog(){
+        LogLWCController.LogLWCWrapper wrapper = new LogLWCController.LogLWCWrapper();
         wrapper.objectType = 'Property__c';
         wrapper.actionType = 'Insert';
         wrapper.description = 'description';

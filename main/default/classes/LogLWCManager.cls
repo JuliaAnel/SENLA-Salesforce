@@ -1,14 +1,6 @@
 public inherited sharing class LogLWCManager {
-   
-    public class LogLWCWrapper{
-        public String objectType {get; set;}
-        public String actionType {get; set;}
-        public String description {get; set;}
-        public Boolean isSuccessful {get; set;}
-        public String errorMessage {get; set;}
-    }
     
-    public static LogLWC__c createLog(LogLWCWrapper wrapper, Boolean serialize) {
+    public static LogLWC__c createLog(LogLWCController.LogLWCWrapper wrapper, Boolean serialize) {
         LogLWC__c log = new LogLWC__c();
         log.ObjectType__c = wrapper.objectType;
         log.ActionType__c = wrapper.actionType;

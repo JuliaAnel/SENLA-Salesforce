@@ -7,7 +7,8 @@ import { SUCCESS_TITLE,
     ERROR_TITLE, 
     ERROR_VARIANT, 
     showNotification, 
-    PROPERTY_OBJECT } from 'c/utils';
+    PROPERTY_OBJECT,
+    ACTION_TYPE_INSERT } from 'c/utils';
 
 import propertyRecordTypes from './propertyRecordTypes.html';
 import propertyFields from './propertyFields.html';
@@ -121,17 +122,19 @@ export default class PropertyCreation extends LightningElement {
                 showNotification(this, ERROR_TITLE, error.getMessage(), ERROR_VARIANT);
                 this.errorMessage = error.message;
             } finally {
-                this.createLog('Insert', description, errorMessage);
+                this.createLog(ACTION_TYPE_INSERT, description, errorMessage);
             }
         } 
     }
 
     createLog(actionType, description, errorMessage) {
-        createLogLWC({
+        
+        const wrapperForLWClog = {
             objectType: PROPERTY_OBJECT.objectApiName, 
             actionType: actionType,
             description: description,
-            description: errorMessage
-        });
+            errorMessage: errorMessage
+        };
+        createLogLWC({ wrapper: wrapperForLWClog });
     }
 }
