@@ -1,15 +1,21 @@
-import { LightningElement } from 'lwc'
-import { PEOPLE, COLUMNS, OPTIONS, SORT_BY, GENDER_MALE, GENDER_FEMALE, ELEMENT_TYPE_CHECKBOX, VALUE } from 'c/utils'
+import { LightningElement, track } from 'lwc'
+import { PEOPLE, COLUMNS, OPTIONS, GENDER_MALE, GENDER_FEMALE, RADIO, VALUE } from 'c/utils'
 
 export default class personInfo extends LightningElement {
 
 	people = PEOPLE
 	columns = COLUMNS
-	value = SORT_BY
+	value = VALUE
+	sortby = undefined
+	from = undefined
+	to = undefined
+	gender = undefined
+	email = undefined
+	@track selectedgender = ''
 
 	optionsGender = [
-		{ label: 'Male', value: GENDER_MALE, checked: null },
-		{ label: 'Female', value: GENDER_FEMALE, checked: null },
+		{ label: 'Male', value: GENDER_MALE },
+		{ label: 'Female', value: GENDER_FEMALE},
 	]
 
   	get options() {
@@ -18,61 +24,95 @@ export default class personInfo extends LightningElement {
 
   	handleSortBy(event) {
     	this.value = event.detail.value;
-    	const resultSort = JSON.parse(JSON.stringify(this.people)).sort((a, b) =>
-      	a[event.detail.value].localeCompare(b[event.detail.value])
-    	);
-    	this.people = resultSort;
+		this.fullSorted();
   	}
  
+	sortBy(value) {
+		this.people = JSON.parse(JSON.stringify(this.people)).sort((a, b) =>
+      	a[value].localeCompare(b[value])
+    	);
+	}
+
   	handleChangeFrom(event) {
-    	const selectedFromDate = new Date(event.detail.value);
-    	const resultFromDate = this.people.filter((item) => {
-      	return new Date(item.birthday) >= selectedFromDate;
-    	});
-    	this.people = resultFromDate;
+    	this.from = new Date(event.detail.value);
+		this.fullSorted();
   	}
+
+	sortedFrom(from) {
+		this.people = this.people.filter((item) => {
+			return new Date(item.birthday) >= from;
+		  });
+	}
 
   	handleChangeTo(event) {
-    	const selectedToDate = new Date(event.detail.value);
-    	const resultToDate = this.people.filter((item) => {
-      	return new Date(item.birthday) <= selectedToDate;
-    	});
-    	this.people = resultToDate;
+    	this.to = new Date(event.detail.value);
+		this.fullSorted();
   	}
 
-  	handleChangeGender(e) {
-    	const valueGender = e.target.name;
-    	if (valueGender === GENDER_MALE) {
-      		this.optionsGender[0].checked = true;
-      		this.optionsGender[1].checked = false;
-    	} else {
-      		this.optionsGender[1].checked = true;
-      		this.optionsGender[0].checked = false;
-    	}
-    	const resultFilterByGender = this.people.filter((item) => {
-      	return item.gender === valueGender;
-    	});
-    	this.people = resultFilterByGender;
+	sortedTo(to) {
+		this.people = this.people.filter((item) => {
+			return new Date(item.birthday) <= to;
+		  });
+	}
+
+	  handleChangeGender(e) {
+		this.gender = e.detail.value;
+		this.fullSorted();
   	}
+
+	sortedGender(gender) {
+		this.people = this.people.filter((item) => {	
+			return gender == item.gender;
+		  });
+	}
 
   	handleChangeEmail(event) {
-    	const resultFilterByEmail = this.people.filter((item) => {
-      	return item.email
-        	.toLowerCase()
-        	.includes(event.target.value.toLowerCase());
-    	});
-    	this.people = resultFilterByEmail;
+		this.email = event.target.value.toLowerCase();
+		this.fullSorted();
   	}
+
+	sortedEmail(email) {
+		this.people = this.people.filter((item) => {
+			return item.email
+			  .toLowerCase()
+			  .includes(email);
+		  });
+	}
+
+	fullSorted() {
+		this.people = PEOPLE;
+
+		if(this.from != undefined) {
+			this.sortedFrom(this.from);
+		}
+		if(this.to != undefined) {
+			this.sortedTo(this.to);
+		}
+		if(this.gender != undefined) {
+			this.sortedGender(this.gender);
+		}
+		if(this.email != undefined) {
+			this.sortedEmail(this.email);
+		}
+		if(this.value != VALUE) {
+			this.sortBy(this.value);
+		}
+	}
 
   	handleReset() {
     	this.value = VALUE;
     	this.template.querySelectorAll("lightning-input").forEach((element) => {
-      	if (element.type === ELEMENT_TYPE_CHECKBOX) {
+      	if (element.type === RADIO) {
         	element.checked = false;
       	} else {
         	element.value = null;
       	}
-      	this.people = people;
+      	this.people = PEOPLE;
+		this.selectedgender = undefined;
+		this.from = undefined;
+		this.to = undefined;
+		this.gender = undefined;
+		this.email = undefined;
     	});
   	}
 }

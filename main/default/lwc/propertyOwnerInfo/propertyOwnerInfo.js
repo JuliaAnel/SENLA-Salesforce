@@ -3,7 +3,7 @@ import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import { NavigationMixin } from 'lightning/navigation';
 import { OWNER_FIRST_NAME, OWNER_LAST_NAME, OWNER_PHONE, OWNER_HOME_PHONE, OWNER_EMAIL,
         OWNER_TOTAL_PROPERTY_PRICE, PROPERTY_OWNER, STANDARD_RECORD_PAGE,
-        PAGE_ACTION_NAME_VIEW, CONTACT_OBJECT, PROPERTY_OWNER_FIELDS } from 'c/utils';
+        PAGE_ACTION_NAME_VIEW, CONTACT_OBJECT, PROPERTY_OWNER_FIELDS, navigateTo } from 'c/utils';
 
 export default class PropertyOwnerInfo extends NavigationMixin(LightningElement) {
     @api recordId;
@@ -37,13 +37,12 @@ export default class PropertyOwnerInfo extends NavigationMixin(LightningElement)
 
     navigateToOwnerPage(event) {
         event.preventDefault();
-        this[NavigationMixin.Navigate]({
-          type: STANDARD_RECORD_PAGE,
-            attributes: {
-                recordId: getFieldValue(this.owner.data, PROPERTY_OWNER),
-                objectApiName: CONTACT_OBJECT,
-                actionName: PAGE_ACTION_NAME_VIEW
-            },
-        });
+        navigateTo(
+            this,
+            STANDARD_RECORD_PAGE, 
+            getFieldValue(this.owner.data, PROPERTY_OWNER),
+            CONTACT_OBJECT,
+            PAGE_ACTION_NAME_VIEW
+        );
     }
 }

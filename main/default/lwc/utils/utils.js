@@ -9,6 +9,7 @@ import OWNER_EMAIL from '@salesforce/schema/Property__c.Property_Owner__r.Email'
 import OWNER_TOTAL_PROPERTY_PRICE from '@salesforce/schema/Property__c.Property_Owner__r.Total_Property_Price__c';
 import PROPERTY_OWNER from '@salesforce/schema/Property__c.Property_Owner__c';
 import CONTACT_OBJECT from '@salesforce/schema/Contact';
+import { NavigationMixin } from 'lightning/navigation';
 
 const SUCCESS_TITLE = "Property creation";
 const SUCCESS_MESSAGE = "Property is successfully created";
@@ -17,8 +18,7 @@ const ERROR_TITLE = "Property is not created";
 const ERROR_VARIANT = "destructive";
 const STANDARD_RECORD_PAGE = 'standard__recordPage';
 const PAGE_ACTION_NAME_VIEW = 'view';
-const ELEMENT_TYPE_CHECKBOX = 'checkbox';
-const SORT_BY = 'sortBy';
+const RADIO = 'radio';
 const GENDER_MALE = 'MALE';
 const GENDER_FEMALE = 'FEMALE';
 const LOG_LWC_FIELDS = 'ObjectType__c, ActionType__c, Description__c, IsSuccessful__c, ErrorMessage__c, CreatedDate';
@@ -71,8 +71,20 @@ const LOG_LWC_COLUMNS = [
   	{ label: "Created Date", fieldName: "CreatedDate", type: "date" }
 ];
 
+function navigateTo(fromPage, type, recordId, objectApiName, actionName) {
+    fromPage[NavigationMixin.Navigate]({
+        type: type,
+        attributes: {
+            recordId: recordId,
+            objectApiName: objectApiName,
+            actionName: actionName,
+        },
+    });
+}
+
 export {
-	OPTIONS, 
+	OPTIONS,
+	navigateTo, 
 	PEOPLE, 
 	COLUMNS, 
 	SUCCESS_TITLE,
@@ -86,8 +98,7 @@ export {
 	LOG_LWC_FIELDS, 
 	LOG_LWC_COLUMNS,
 	CREATED_DATE,
-	ELEMENT_TYPE_CHECKBOX,
-	SORT_BY,
+	RADIO,
 	GENDER_MALE,
 	GENDER_FEMALE,
 	PROPERTY_OBJECT,
@@ -100,5 +111,5 @@ export {
     PROPERTY_OWNER,
     CONTACT_OBJECT,
     PROPERTY_OWNER_FIELDS
-    };
+	};
 
