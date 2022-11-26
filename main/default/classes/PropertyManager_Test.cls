@@ -10,7 +10,7 @@ private class PropertyManager_Test {
         List<Id> ids = new List<Id>();
         for(Property__c p : [SELECT Id FROM Property__c]);
         p.add(ids.Id);
-        List<Property__c> properties = PropertyManager.getPropertyByIds(ids, 2500, 1000000);
+        List<Property__c> properties = PropertyManager.getPropertyByIds(ids, 1000000);
         System.assertEquals(ids.size(), properties.size());
     }
 

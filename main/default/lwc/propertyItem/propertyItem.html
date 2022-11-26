@@ -1,0 +1,11 @@
+<template>
+    <div class="container" onclick={elementClick}>
+            <div class="title">{property.Name}</div>
+            <div><img class="product-img" src={imgUrl}></img></div>
+            <p>
+                Lease Price:<lightning-formatted-number value={property.Lease_Price__c} format-style="currency" currency-code="USD"></lightning-formatted-number>
+            </p><br>
+                Selling Price: <lightning-formatted-number value={property.Selling_Price__c} format-style="currency" currency-code="USD"></lightning-formatted-number>
+            </p> </p>
+    </div>
+</template>

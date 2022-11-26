@@ -1,16 +1,40 @@
 public inherited sharing class PropertyManager {
 
     public class PropertyWrapper{
-
+        @AuraEnabled 
         public String address {get; set;}
+        @AuraEnabled 
         public Id owner {get; set;}
+        @AuraEnabled 
         public Decimal leasePrice {get; set;}
+        @AuraEnabled 
         public Decimal sellingPrice {get; set;}
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static List<Property__c> getAllProperties(String fields){
+        return Database.query('SELECT ' + fields + ' FROM Property__c');
     }
 
     public static List<Property__c> getPropertyByIds(List<Id> ids, String fields) {
         return Database.query('SELECT ' + fields + ' FROM Property__c WHERE Id IN :ids');
     }
+
+    @AuraEnabled
+    public static void createPropertyList(String wrappersJson) {
+     List<PropertyWrapper> wrappers=(List<PropertyWrapper>)JSON.deserialize(wrappersJson,List<PropertyWrapper>.class);
+     List<Property__c> propertiesList=new List<Property__c>();
+     for(Integer i=0;i<wrappers.size();i++){
+         Property__c property = new Property__c();
+         property.Adress__c = wrappers[i].address;
+         property.Property_Owner__r.Name = wrappers[i].owner; 
+         property.Lease_Price__c = wrappers[i].leasePrice;
+         property.Selling_Price__c = wrappers[i].sellingPrice;
+          
+         propertiesList.add(property); 
+         }
+         insert propertiesList;  
+     }
 
     public static Property__c createProperty(PropertyWrapper wrapper, Boolean serialize) {
 
