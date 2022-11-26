@@ -20,14 +20,18 @@ public inherited sharing class PropertyManager {
         return Database.query('SELECT ' + fields + ' FROM Property__c WHERE Id IN :ids');
     }
 
+    public static AggregateResult getPropertiesCount(String value) {
+        return Database.query('SELECT Count(Id) ' + value + ' FROM Property__c');
+    }
+
     @AuraEnabled
     public static void createPropertyList(String wrappersJson) {
      List<PropertyWrapper> wrappers=(List<PropertyWrapper>)JSON.deserialize(wrappersJson,List<PropertyWrapper>.class);
      List<Property__c> propertiesList=new List<Property__c>();
      for(Integer i=0;i<wrappers.size();i++){
          Property__c property = new Property__c();
-         property.Adress__c = wrappers[i].address;
-         property.Property_Owner__r.Name = wrappers[i].owner; 
+         property.Address__c = wrappers[i].address;
+         property.Property_Owner__c = wrappers[i].owner; 
          property.Lease_Price__c = wrappers[i].leasePrice;
          property.Selling_Price__c = wrappers[i].sellingPrice;
           
