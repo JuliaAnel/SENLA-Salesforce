@@ -2,7 +2,7 @@
     <template if:true={property}>
         <div class="container">
             <div class="title">{property.Name}</div>
-            <img class="elementImage" src={imgUrl}></img>
+            <img class="elementImage" src={property.Picture_URL__c}></img>
             <p> Lease Price:
                 <lightning-formatted-number 
                     value={property.Lease_Price__c}

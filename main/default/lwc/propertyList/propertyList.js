@@ -1,31 +1,47 @@
-import { LightningElement, wire } from 'lwc';
+import { LightningElement, wire, track } from 'lwc';
 import getPropertiesCount from '@salesforce/apex/PropertyController.getPropertiesCount';
-import getAllProperties from '@salesforce/apex/PropertyManager.getAllProperties';
+import getProperties from '@salesforce/apex/PropertyController.getProperties';
 import {PAGE_SIZE, PROPERTY_FIELDS} from 'c/utils';
 
 export default class PropertyList extends LightningElement {
 
-    @wire(getPropertiesCount)
-    recordsCount;
-
-	@wire(getAllProperties,{ fields:PROPERTY_FIELDS })
-	properties;
-
-	selectedElementId;
+	selectedProperty;
     pageNumber = 1;
     pageSize = PAGE_SIZE;
+    @track 
+    propertiesArray = [];
 
-	connectedCallback() {
-		this.getDataForPage(this.pageNumber);
-	}
+    recordsCount = 0;
 
-	handleElementSelected(evt) {
-        this.selectedElementId = evt.detail;
+    @wire(getPropertiesCount)
+    recordCount({ error, data }) {
+        if (data) {
+            this.recordsCount = data;
+        }
+        else if (error) {
+            this.recordsCount = 0;
+        }
+    }
+
+    @wire(getProperties, { fields: PROPERTY_FIELDS.join(", "), pageNumber: '$pageNumber' })
+    properties({ error, data }) {
+        if (data) {
+            this.propertiesArray = data;
+    }   
+        else if (error) { 
+             this.propertiesArray = [];
+        }
+    }    
+
+	handlePropertySelected(evt) {
+        console.log(evt.detail);
+        this.selectedProperty = evt.detail;
     }
 
 	handlePreviousPage() {
         this.pageNumber = this.pageNumber - 1;
 		this.getDataForPage(this.pageNumber);
+        
     }
 
     handleNextPage() {
@@ -33,10 +49,13 @@ export default class PropertyList extends LightningElement {
 		this.getDataForPage(this.pageNumber);
     }
 
-	getDataForPage(pageNumber){
-		const indexFrom = (pageNumber - 1) * PAGE_SIZE;
-		const indexTo = pageNumber * PAGE_SIZE > recordsCount ? recordsCount : pageNumber * PAGE_SIZE;
-
-		this.properties = properties.slice(indexFrom, indexTo);
+	getDataForPage(currentPageNumber){
+        getProperties({ fields: PROPERTY_FIELDS.join(", "), pageNumber: currentPageNumber })
+            .then(result => {
+                this.propertiesArray = result;
+            })
+            .catch(error => {
+                this.propertiesArray = [];
+            });
 	}
 }

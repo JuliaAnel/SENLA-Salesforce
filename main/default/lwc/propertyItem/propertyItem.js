@@ -1,12 +1,10 @@
 import { LightningElement, api } from 'lwc';
-import PROPERTY_IMAGE from 'c/utils';
 export default class PropertyItem extends LightningElement {
-	@api property;
-    imgUrl = PROPERTY_IMAGE;
+	@api propertyItem;
 
-	elementClick() {
-        const event = new CustomEvent('elementselected', {
-            detail: this.property.Id
+	propertyClick() { 
+        const event = new CustomEvent('propertyselected', {
+            detail: this.propertyItem
         });
         this.dispatchEvent(event);
     }

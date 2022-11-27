@@ -1,29 +1,26 @@
 <template>
 	<div class="slds-grid slds-wrap">
 		<div class="slds-col slds-size_12-of-12">Properties</div>
-
 		<div class="slds-col slds-size_8-of-12">
-			<template if:true={properties}>
-				<div class="content">
-                    <template for:each={properties} for:item="property">
-                        <c-property-item
-                            key={property.Id}
-                            element={property}
-                            onelementselected={handleElementSelected}
-                            class="slds-var-m-around_xx-small">
-                        </c-property-item>
-                    </template>
-                </div>
-			</template>
+			<div class="content">
+                <template for:each={propertiesArray} for:item="property">
+                    <c-property-item
+                        key={property.Id}
+                        property-item={property}
+                        onpropertyselected={handlePropertySelected}
+                        class="slds-var-m-around_xx-small">
+                    </c-property-item>
+				</template>
+            </div>	
 		</div>
 		<div class="slds-col slds-size_4-of-12">
-			<c-property-details element-id={selectedElementId}></c-property-details>
+			<c-property-details property={selectedProperty}></c-property-details>
 		</div>
 		<div class="slds-col slds-size_12-of-12">
 			<c-pagination
                 page-number={pageNumber}
                 page-size={pageSize}
-                total-item-count={recordsCount}
+                records-count={recordsCount}
                 onprevious={handlePreviousPage}
                 onnext={handleNextPage}>
 			</c-pagination>

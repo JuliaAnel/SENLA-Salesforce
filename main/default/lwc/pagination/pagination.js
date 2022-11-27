@@ -4,6 +4,7 @@ export default class Paginator extends LightningElement {
     
     @api pageNumber;
     @api pageSize;
+    @api recordsCount;
 
     handlePrevious() {
         this.dispatchEvent(new CustomEvent('previous'));
@@ -14,7 +15,7 @@ export default class Paginator extends LightningElement {
     }
 
     get currentPageNumber() {
-        return recordsCount === 0 ? 0 : this.pageNumber;
+        return this.recordsCount === 0 ? 0 : this.pageNumber;
     }
 
     get isFirstPage() {
@@ -26,6 +27,6 @@ export default class Paginator extends LightningElement {
     }
 
     get totalPages() {
-        return Math.ceil(recordsCount / this.pageSize);
+        return Math.ceil(this.recordsCount / this.pageSize);
     }
 }

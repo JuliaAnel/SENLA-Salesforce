@@ -7,11 +7,17 @@ import OWNER_PHONE from '@salesforce/schema/Property__c.Property_Owner__r.Phone'
 import OWNER_HOME_PHONE from '@salesforce/schema/Property__c.Property_Owner__r.HomePhone';
 import OWNER_EMAIL from '@salesforce/schema/Property__c.Property_Owner__r.Email';
 import OWNER_TOTAL_PROPERTY_PRICE from '@salesforce/schema/Property__c.Property_Owner__r.Total_Property_Price__c';
-import PROPERTY_OWNER from '@salesforce/schema/Property__c.Property_Owner__c';
+import PROPERTY_OWNER from '@salesforce/schema/Property__c.Property_Owner__r.Name';
 import CONTACT_OBJECT from '@salesforce/schema/Contact';
 import { NavigationMixin } from 'lightning/navigation';
+import PROPERTY_ID from '@salesforce/schema/Property__c.Id';
+import PROPERTY_NAME from '@salesforce/schema/Property__c.Name';
+import PROPERTY_ADDRESS from '@salesforce/schema/Property__c.Address__c';
+import PROPERTY_LEASE_PRICE from '@salesforce/schema/Property__c.Lease_Price__c';
+import PROPERTY_SELLING_PRICE from '@salesforce/schema/Property__c.Selling_price__c';
+import PROPERTY_PICTURE_URL from '@salesforce/schema/Property__c.Picture_URL__c';
 
-const PROPERTY_FIELDS = 'Name, Address__c, Lease_Price__c, Selling_Price__c, Property_Owner__r.Name';
+
 const ACTION_TYPE_INSERT = 'Insert';
 const SUCCESS_TITLE = "Property creation";
 const SUCCESS_MESSAGE = "Property is successfully created";
@@ -24,7 +30,19 @@ const RADIO = 'radio';
 const GENDER_MALE = 'MALE';
 const GENDER_FEMALE = 'FEMALE';
 const LOG_LWC_FIELDS = 'ObjectType__c, ActionType__c, Description__c, IsSuccessful__c, ErrorMessage__c, CreatedDate';
+const PROPERTY_OWNER_FIELDS = [OWNER_FIRST_NAME, OWNER_LAST_NAME, OWNER_PHONE, OWNER_HOME_PHONE, OWNER_EMAIL, OWNER_TOTAL_PROPERTY_PRICE, PROPERTY_OWNER];
 const PAGE_SIZE = 8;
+
+const PROPERTY_FIELDS = [
+    PROPERTY_ID.fieldApiName,
+    PROPERTY_NAME.fieldApiName,
+	PROPERTY_ADDRESS.fieldApiName,
+    PROPERTY_OWNER.fieldApiName,
+    PROPERTY_LEASE_PRICE.fieldApiName,
+    PROPERTY_SELLING_PRICE.fieldApiName,
+	PROPERTY_PICTURE_URL.fieldApiName
+    
+];
 
 const PEOPLE = [
 	{Id:1, lastName: 'Rush', firstName: 'Stefania', gender: 'FEMALE', birthday: '10.09.2005', email: 'Stefania@com'},
@@ -113,6 +131,7 @@ export {
     OWNER_TOTAL_PROPERTY_PRICE,
     PROPERTY_OWNER,
     CONTACT_OBJECT,
+	PROPERTY_OWNER_FIELDS,
     PROPERTY_FIELDS,
 	PAGE_SIZE
 	};

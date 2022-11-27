@@ -1,11 +1,15 @@
 <template>
-    <div class="container" onclick={elementClick}>
-            <div class="title">{property.Name}</div>
-            <div><img class="product-img" src={imgUrl}></img></div>
+    <template if:true={propertyItem}>
+        <div class="container">
+            <a onclick={propertyClick}>
+            <div class="title">{propertyItem.Name}</div>
+            <div><img class="product-img" src={propertyItem.Picture_URL__c}></img></div>
             <p>
-                Lease Price:<lightning-formatted-number value={property.Lease_Price__c} format-style="currency" currency-code="USD"></lightning-formatted-number>
+                Lease Price:<lightning-formatted-number value={propertyItem.Lease_Price__c} format-style="currency" currency-code="USD"></lightning-formatted-number>
             </p><br>
-                Selling Price: <lightning-formatted-number value={property.Selling_Price__c} format-style="currency" currency-code="USD"></lightning-formatted-number>
-            </p> </p>
-    </div>
+                <p>Selling Price: <lightning-formatted-number value={propertyItem.Selling_Price__c} format-style="currency" currency-code="USD"></lightning-formatted-number>
+            </p>
+        </a>
+        </div>
+    </template>
 </template>

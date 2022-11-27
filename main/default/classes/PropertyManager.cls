@@ -11,7 +11,6 @@ public inherited sharing class PropertyManager {
         public Decimal sellingPrice {get; set;}
     }
 
-    @AuraEnabled(cacheable=true)
     public static List<Property__c> getAllProperties(String fields){
         return Database.query('SELECT ' + fields + ' FROM Property__c');
     }
@@ -20,8 +19,13 @@ public inherited sharing class PropertyManager {
         return Database.query('SELECT ' + fields + ' FROM Property__c WHERE Id IN :ids');
     }
 
+    @AuraEnabled(cacheable=true)
     public static AggregateResult getPropertiesCount(String value) {
         return Database.query('SELECT Count(Id) ' + value + ' FROM Property__c');
+    }
+
+    public static List<Property__c> getPropertiesWithLimit(String fields, Integer pageSize, Integer offset) {
+        return Database.query('SELECT ' + fields + ' FROM Property__c ORDER BY Name LIMIT :pageSize OFFSET :offset');
     }
 
     @AuraEnabled

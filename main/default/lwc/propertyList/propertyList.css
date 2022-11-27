@@ -4,4 +4,10 @@
 	background: white;
 	color: #000; 
   }
+
+  .slds-grid {
+	background-color: white !important;
+	padding: 10px;
+  }
+
   
