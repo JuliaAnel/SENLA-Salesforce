@@ -4,7 +4,9 @@ import getProperties from '@salesforce/apex/PropertyController.getProperties';
 import {PAGE_SIZE, PROPERTY_FIELDS} from 'c/utils';
 
 export default class PropertyList extends LightningElement {
-
+    errorItem;
+    spinner = true;
+    hasError = false;
 	selectedProperty;
     pageNumber = 1;
     pageSize = PAGE_SIZE;
@@ -17,8 +19,11 @@ export default class PropertyList extends LightningElement {
     recordCount({ error, data }) {
         if (data) {
             this.recordsCount = data;
+            this.spinner = false;
         }
         else if (error) {
+            this.hasError = true;
+            this.errorItem = {header: 'Get properties count error', message: error.message};
             this.recordsCount = 0;
         }
     }
@@ -29,6 +34,8 @@ export default class PropertyList extends LightningElement {
             this.propertiesArray = data;
     }   
         else if (error) { 
+             this.hasError = true;
+             this.errorItem = {header: 'Get properties error', message: error.message};
              this.propertiesArray = [];
         }
     }    
@@ -39,12 +46,14 @@ export default class PropertyList extends LightningElement {
     }
 
 	handlePreviousPage() {
+        this.spinner = true;
         this.pageNumber = this.pageNumber - 1;
 		this.getDataForPage(this.pageNumber);
         
     }
 
     handleNextPage() {
+        this.spinner = true;
         this.pageNumber = this.pageNumber + 1;
 		this.getDataForPage(this.pageNumber);
     }
@@ -53,8 +62,11 @@ export default class PropertyList extends LightningElement {
         getProperties({ fields: PROPERTY_FIELDS.join(", "), pageNumber: currentPageNumber })
             .then(result => {
                 this.propertiesArray = result;
+                this.spinner = false;
             })
             .catch(error => {
+                this.hasError = true;
+                this.errorItem = {header: 'Get properties error', message: error.message};
                 this.propertiesArray = [];
             });
 	}

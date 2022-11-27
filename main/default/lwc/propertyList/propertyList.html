@@ -1,29 +1,37 @@
 <template>
 	<div class="slds-grid slds-wrap">
-		<div class="slds-col slds-size_12-of-12">Properties</div>
-		<div class="slds-col slds-size_8-of-12">
-			<div class="content">
-                <template for:each={propertiesArray} for:item="property">
-                    <c-property-item
-                        key={property.Id}
-                        property-item={property}
-                        onpropertyselected={handlePropertySelected}
-                        class="slds-var-m-around_xx-small">
-                    </c-property-item>
-				</template>
-            </div>	
-		</div>
-		<div class="slds-col slds-size_4-of-12">
-			<c-property-details property={selectedProperty}></c-property-details>
-		</div>
-		<div class="slds-col slds-size_12-of-12">
-			<c-pagination
-                page-number={pageNumber}
-                page-size={pageSize}
-                records-count={recordsCount}
-                onprevious={handlePreviousPage}
-                onnext={handleNextPage}>
-			</c-pagination>
-		</div>
+		<template if:true={spinner}>
+			<c-spinner></c-spinner> 
+		</template>
+		<template if:false={spinner}>
+			<div class="slds-col slds-size_12-of-12">Properties</div>
+			<div class="slds-col slds-size_8-of-12">
+				<div class="content">
+                    <template for:each={propertiesArray} for:item="property">
+                        <c-property-item
+                            key={property.Id}
+                            property-item={property}
+                            onpropertyselected={handlePropertySelected}
+                            class="slds-var-m-around_xx-small">
+                        </c-property-item>
+                    </template>
+                </div>	
+			</div>
+			<div class="slds-col slds-size_4-of-12">
+				<c-property-details property={selectedProperty}></c-property-details>
+			</div>
+			<div class="slds-col slds-size_12-of-12">
+				<c-pagination
+                	page-number={pageNumber}
+                	page-size={pageSize}
+                	records-count={recordsCount}
+                	onprevious={handlePreviousPage}
+                	onnext={handleNextPage}>
+				</c-pagination>
+			</div>
+		</template>	
+		<template if:true={hasError}>
+			<c-error-handler error-item={errorItem}></c-error-handler> 
+		</template>
 	</div>
 </template>
