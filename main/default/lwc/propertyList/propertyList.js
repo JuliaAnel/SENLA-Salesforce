@@ -23,7 +23,7 @@ export default class PropertyList extends LightningElement {
         }
         else if (error) {
             this.hasError = true;
-            this.errorItem = {header: 'Get properties count error', message: error.body.message};
+            this.errorItem = {message: error.body.message};
             this.recordsCount = 0;
         }
     }
@@ -36,7 +36,7 @@ export default class PropertyList extends LightningElement {
     }   
         else if (error) { 
              this.hasError = true;
-             this.errorItem = {header: 'Get properties error', message: error.body.message};
+             this.errorItem = {message: error.body.message};
              this.propertiesArray = [];
         }
     }    
@@ -67,7 +67,7 @@ export default class PropertyList extends LightningElement {
             .catch(error => {
                 this.spinner = false;
                 this.hasError = true;
-                this.errorItem = {header: 'Get properties error', message: error.body.message};
+                this.errorItem = {message: error.body.message};
                 this.propertiesArray = [];
             });
 	}

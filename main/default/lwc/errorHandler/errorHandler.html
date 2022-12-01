@@ -1,4 +1,10 @@
 <template>
-    <div>{errorItem.header}</div>
+    <div class="slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+        <div class="slds-icon_container slds-icon-utility-error slds-m-right_x-small">
+            <lightning-icon icon-name="utility:error" variant="inverse"></lightning-icon>
+        </div>  
+    <h2>{errorHeader}</h2><br/>
     <div>{errorItem.message}</div>
+</div>
 </template>
+
