@@ -33,11 +33,6 @@ export default class PropertyList extends LightningElement {
         }
     }    
 
-	handlePropertySelected(evt) {
-        console.log(evt.detail);
-        this.selectedProperty = evt.detail;
-    }
-
 	handlePreviousPage() {
         this.pageNumber = this.pageNumber - 1;
 		this.getDataForPage(this.pageNumber);
