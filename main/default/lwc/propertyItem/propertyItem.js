@@ -7,7 +7,7 @@ export default class PropertyItem extends LightningElement {
     @wire(MessageContext)
     messageContext;
 
-	propertyClick() { 
+	handlePropertyClick() { 
         const payload = { 
             propertyId: this.propertyItem.Id,
             propertyName: this.propertyItem.Name,
