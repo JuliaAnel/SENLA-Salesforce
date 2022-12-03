@@ -23,7 +23,7 @@ export default class PropertyList extends LightningElement {
         }
         else if (error) {
             this.hasError = true;
-            this.errorItem = {message: error.body.message};
+            this.errorItem = {message: error.message};
             this.recordsCount = 0;
         }
     }
@@ -36,14 +36,10 @@ export default class PropertyList extends LightningElement {
     }   
         else if (error) { 
              this.hasError = true;
-             this.errorItem = {message: error.body.message};
+             this.errorItem = {message: error.message};
              this.propertiesArray = [];
         }
     }    
-
-	handlePropertySelected(evt) {
-        this.selectedProperty = evt.detail;
-    }
 
 	handlePreviousPage() {
         this.spinner = true;
@@ -67,7 +63,7 @@ export default class PropertyList extends LightningElement {
             .catch(error => {
                 this.spinner = false;
                 this.hasError = true;
-                this.errorItem = {message: error.body.message};
+                this.errorItem = {message: error.message};
                 this.propertiesArray = [];
             });
 	}

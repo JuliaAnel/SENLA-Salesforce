@@ -1,8 +1,9 @@
   .content {
+	 
 	display: flex;
-	flex: 1;
-	background: white;
-	color: #000; 
+   flex-direction: row;
+   flex-wrap: wrap;
+   background: white;
   }
 
   .slds-grid {

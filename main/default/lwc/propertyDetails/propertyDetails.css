@@ -1,14 +1,6 @@
-div.container{
-	margin: 20px !important;
-	border: solid;
-	border-radius: 15px;
-	padding: 15px;
-}
 .title{
 	font-weight: bold;
+	font-size: larger;
 }
 
-elementImage {
-	height: 200px;
-	padding: 5px 0 5px 0;
-}
+

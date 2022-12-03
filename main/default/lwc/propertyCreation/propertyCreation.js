@@ -15,6 +15,7 @@ import propertyFields from './propertyFields.html';
 
 export default class PropertyCreation extends LightningElement {
     
+    propertyRecordTypeName;
     propertyRecordType;
     showPropertyTypePicker = true;
     showPropertyFields = false;
@@ -40,7 +41,7 @@ export default class PropertyCreation extends LightningElement {
             });
          });
         recordsTypeArray[0].checked = true;
-        this.propertyRecordType = recordsTypeArray[0].value;
+        this.checkedValue = recordsTypeArray[0].value;
         return recordsTypeArray;
     }
 
@@ -56,6 +57,7 @@ export default class PropertyCreation extends LightningElement {
         });
         event.target.checked = true;
         this.propertyRecordType = event.target.name;
+        this.propertyRecordTypeName = event.target.label;
     }
     
     submitRecordType(event) { 
@@ -109,7 +111,7 @@ export default class PropertyCreation extends LightningElement {
         });
 
         if (isPropertyValid) {
-            let description = `${this.elements.length} records with record type \"${this.propertyRecordType}\"`;
+            let description = `${this.elements.length} records with record type \"${this.propertyRecordTypeName}\"`;
             let errorMessage = '';
 
             try {
@@ -122,19 +124,8 @@ export default class PropertyCreation extends LightningElement {
                 showNotification(this, ERROR_TITLE, error.getMessage(), ERROR_VARIANT);
                 this.errorMessage = error.message;
             } finally {
-                this.createLog(ACTION_TYPE_INSERT, description, errorMessage);
+                createLogLWC({objectType: 'Property', actionType: ACTION_TYPE_INSERT, description: description, errorMessage: errorMessage});
             }
         } 
-    }
-
-    createLog(actionType, description, errorMessage) {
-        
-        const wrapperForLWClog = {
-            objectType: PROPERTY_OBJECT.objectApiName, 
-            actionType: actionType,
-            description: description,
-            errorMessage: errorMessage
-        };
-        createLogLWC({ wrapper: wrapperForLWClog });
     }
 }

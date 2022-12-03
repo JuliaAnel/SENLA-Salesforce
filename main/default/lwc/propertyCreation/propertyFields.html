@@ -1,5 +1,5 @@
 <template>
-    <lightning-card>
+    <lightning-card title="Property Creation" icon-name="standard:agent_home">
         <template for:each={elements} for:item="element" for:index="index">
             <lightning-record-edit-form class="slds-p-around_small" key={element.id} object-api-name="Property__c">
                 <lightning-messages> </lightning-messages> 
@@ -14,7 +14,7 @@
                         <lightning-input-field field-name="Lease_Price__c"></lightning-input-field>
                     </lightning-layout-item>
                     <lightning-layout-item class="slds-p-around_small">
-                        <lightning-input-field field-name="Property_Owner__c" ></lightning-input-field>
+                        <lightning-input-field field-name="Property_Owner__c" value={recordId} disabled="true" ></lightning-input-field>
                     </lightning-layout-item>
                     <lightning-layout-item class="slds-p-around_small slds-m-top_large">
                         <lightning-button-icon  class="slds-m-top_large"
