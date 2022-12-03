@@ -9,6 +9,7 @@ import OWNER_EMAIL from '@salesforce/schema/Property__c.Property_Owner__r.Email'
 import OWNER_TOTAL_PROPERTY_PRICE from '@salesforce/schema/Property__c.Property_Owner__r.Total_Property_Price__c';
 import PROPERTY_OWNER from '@salesforce/schema/Property__c.Property_Owner__r.Name';
 import CONTACT_OBJECT from '@salesforce/schema/Contact';
+import CONTACT_ID from '@salesforce/schema/Contact.Id';
 import { NavigationMixin } from 'lightning/navigation';
 import PROPERTY_ID from '@salesforce/schema/Property__c.Id';
 import PROPERTY_NAME from '@salesforce/schema/Property__c.Name';
@@ -16,7 +17,6 @@ import PROPERTY_ADDRESS from '@salesforce/schema/Property__c.Address__c';
 import PROPERTY_LEASE_PRICE from '@salesforce/schema/Property__c.Lease_Price__c';
 import PROPERTY_SELLING_PRICE from '@salesforce/schema/Property__c.Selling_price__c';
 import PROPERTY_PICTURE_URL from '@salesforce/schema/Property__c.Picture_URL__c';
-
 
 const ACTION_TYPE_INSERT = 'Insert';
 const SUCCESS_TITLE = "Property creation";
@@ -42,6 +42,14 @@ const PROPERTY_FIELDS = [
     PROPERTY_SELLING_PRICE.fieldApiName,
 	PROPERTY_PICTURE_URL.fieldApiName
     
+];
+
+const FIELDS_FOR_MESSAGE_CHANNEL = [
+	PROPERTY_NAME.fieldApiName,
+	PROPERTY_ADDRESS.fieldApiName,
+	PROPERTY_LEASE_PRICE.fieldApiName, 
+	PROPERTY_SELLING_PRICE.fieldApiName,
+	PROPERTY_OWNER.fieldApiName
 ];
 
 const PEOPLE = [
@@ -119,10 +127,12 @@ export {
 	LOG_LWC_FIELDS, 
 	LOG_LWC_COLUMNS,
 	CREATED_DATE,
+	CONTACT_ID,
 	RADIO,
 	GENDER_MALE,
 	GENDER_FEMALE,
 	PROPERTY_OBJECT,
+	PROPERTY_ID,
     OWNER_FIRST_NAME,
     OWNER_LAST_NAME,
     OWNER_PHONE,
@@ -133,6 +143,6 @@ export {
     CONTACT_OBJECT,
 	PROPERTY_OWNER_FIELDS,
     PROPERTY_FIELDS,
-	PAGE_SIZE
+	PAGE_SIZE,
+	FIELDS_FOR_MESSAGE_CHANNEL
 	};
-
