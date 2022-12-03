@@ -1,26 +1,20 @@
 <template>
-	<div class="slds-grid slds-wrap">
-		<div class="slds-col slds-size_12-of-12">Properties</div>
-		<div class="slds-col slds-size_8-of-12">
-			<div class="content">
-                <template for:each={propertiesArray} for:item="property">
-                    <c-property-item
-                        key={property.Id}
-                        property-item={property}
-                        onpropertyselected={handlePropertySelected}
-                        class="slds-var-m-around_xx-small">
-                    </c-property-item>
-				</template>
-            </div>	
+	<lightning-card title="Properties" icon-name="standard:agent_home">
+		<div class="slds-grid slds-wrap">
+            <template for:each={propertiesArray} for:item="property" >
+				<div class="slds-col slds-size_3-of-12" key={property.id}>
+                    <c-property-item property-item={property}></c-property-item>
+				</div>
+			</template>
+				<div class="slds-col slds-size_12-of-12">
+				<c-pagination
+                	page-number={pageNumber}
+                	page-size={pageSize}
+                	records-count={recordsCount}
+                	onprevious={handlePreviousPage}
+                	onnext={handleNextPage}>
+				</c-pagination>
+				</div>
 		</div>
-		<div class="slds-col slds-size_12-of-12">
-			<c-pagination
-                page-number={pageNumber}
-                page-size={pageSize}
-                records-count={recordsCount}
-                onprevious={handlePreviousPage}
-                onnext={handleNextPage}>
-			</c-pagination>
-		</div>
-	</div>
+	</lightning-card>
 </template>

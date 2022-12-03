@@ -5,7 +5,6 @@ import {PAGE_SIZE, PROPERTY_FIELDS} from 'c/utils';
 
 export default class PropertyList extends LightningElement {
 
-	selectedProperty;
     pageNumber = 1;
     pageSize = PAGE_SIZE;
     @track 
