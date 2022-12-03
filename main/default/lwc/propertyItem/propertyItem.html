@@ -1,7 +1,7 @@
 <template>
     <template if:true={propertyItem}>
         <div class="container">
-            <a onclick={propertyClick}>
+            <a onclick={handlePropertyClick}>
             <div class="title">{propertyItem.Name}</div>
             <div><img class="product-img" src={propertyItem.Picture_URL__c}></img></div>
             <p>

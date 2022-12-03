@@ -1,10 +1,10 @@
 <template>
-    <template if:true={spinner}>
-        <c-spinner></c-spinner> 
-    </template>
-    <template if:false={spinner}>
-    <template if:true={recordId}>
-        <lightning-card title="Property Details" icon-name="standard:home">
+    <lightning-card title="Property Details" icon-name="standard:home">
+        <template if:true={spinner}>
+            <c-spinner></c-spinner> 
+        </template>
+        <template if:false={spinner}>
+        <template if:true={recordId}>
             <div class="slds-p-around_large">
                 <div class="slds-text-align_center slds-text-heading_medium slds-m-bottom_medium">
                     <b>{recordName}</b>
@@ -21,7 +21,6 @@
                     </div>
                 </lightning-record-view-form>
             </div>
-        </lightning-card>
     </template>
 </template>
     <template if:false={recordId}>
@@ -30,4 +29,5 @@
     <template if:true={hasError}>
         <c-error-handler error-item={errorItem}></c-error-handler> 
     </template>
+</lightning-card>
 </template>

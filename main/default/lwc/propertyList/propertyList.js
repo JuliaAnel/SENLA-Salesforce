@@ -7,7 +7,6 @@ export default class PropertyList extends LightningElement {
     errorItem;
     spinner = true;
     hasError = false;
-	selectedProperty;
     pageNumber = 1;
     pageSize = PAGE_SIZE;
     @track 
